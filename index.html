@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PROXY GROUP — консалтинговый бутик, специализирующийся на сложных сделках с активами высокой стоимости. Дьюдилл, форензик, структурирование и реализация сделок под ключ.">
+    <meta name="keywords" content="M&A, консалтинг, дьюдилл, форензик, сделки с активами, структурирование сделок, PROXY GROUP">
+    <title>PROXY GROUP — бутик сложных сделок</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/Proxy_group_logo.png">
+</head>
+<body>
+    <!-- Particles Canvas Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="assets/images/Proxy_group_logo.png" alt="PROXY GROUP" class="logo-img">
+            </a>
+            
+            <nav class="nav-main">
+                <a href="#competencies" class="nav-link">Компетенции</a>
+                <a href="#team" class="nav-link">Команда</a>
+                <a href="#contact" class="nav-link">Контакты</a>
+            </nav>
+            
+            <div class="nav-actions">
+                <a href="https://proxity.io" target="_blank" rel="noopener" class="button primary">Перейти в PROXITY</a>
+            </div>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="#competencies" class="nav-link">Компетенции</a>
+        <a href="#team" class="nav-link">Команда</a>
+        <a href="#contact" class="nav-link">Контакты</a>
+        <div class="nav-actions">
+            <a href="https://proxity.io" target="_blank" rel="noopener" class="button primary">Перейти в PROXITY</a>
+        </div>
+    </div>
+
+    <!-- Block 1: Hero Section -->
+    <section class="section-hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <span class="hero-badge">Бутик сложных сделок</span>
+                <h1 class="hero-title">Сложные сделки,<br>простые решения</h1>
+                <p class="hero-desc">
+                    Бутик, специализирующийся на поиске активов и покупателей, глубоком дьюдилле, форензике, 
+                    структурировании и реализации сделок под ключ.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="button primary">Обсудить сделку</a>
+                    <a href="https://proxity.io" target="_blank" rel="noopener" class="button outline">Перейти к активам в PROXITY</a>
+                </div>
+                <p class="text-center mt-4" style="font-size: 0.9rem; color: var(--text-muted);">
+                    Интеграция с PROXITY — технологичная среда для поиска и верификации активов.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 2: Why PROXY GROUP (3 cards) -->
+    <section id="why-proxy">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Почему PROXY GROUP</h2>
+            <div class="grid-3 stagger-children">
+                <div class="card feature-card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">Экспертиза в сложных сделках</div>
+                    <p>Работаем там, где стандартные решения не подходят, а цена ошибки высока.</p>
+                </div>
+                <div class="card feature-card highlight">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">Контроль всего цикла</div>
+                    <p>От поиска объекта или покупателя до интеграции актива после сделки.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">PROXITY как технологичный контур</div>
+                    <p>Доступ к верифицированным объектам и покупателям в закрытой среде.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 3: Accent Strip -->
+    <section class="accent-strip">
+        <div class="container text-center fade-in-up">
+            <h2>Мы решаем задачи, которые требуют точности, глубины и управленческой дисциплины.</h2>
+            <p>Стрессовые активы. Спорные собственники. Неполные данные. Банковское давление.</p>
+        </div>
+    </section>
+
+    <!-- Block 4: Competencies (Hybrid Grid) -->
+    <section id="competencies">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Основные направления работы</h2>
+            <div class="competencies-grid stagger-children">
+                <!-- Card 1 - Large -->
+                <div class="card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            <line x1="11" y1="8" x2="11" y2="14"/>
+                            <line x1="8" y1="11" x2="14" y2="11"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">Поиск покупателей и объектов</div>
+                    <p>Формируем сделочный контур под конкретную задачу.</p>
+                    <a href="https://proxity.io" target="_blank" rel="noopener" class="link-arrow mt-3">
+                        Смотреть предложения в PROXITY
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">Дьюдилл и форензик</div>
+                    <p>Глубокий анализ, вскрытие рисков, оценка реальной картины актива.</p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                            <polyline points="2 17 12 22 22 17"/>
+                            <polyline points="2 12 12 17 22 12"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">Структурирование сделки</div>
+                    <p>Финансовая, юридическая и корпоративная архитектура, выдерживающая стресс-тест.</p>
+                </div>
+                
+                <!-- Card 4 - Wide -->
+                <div class="card highlight">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">Реализация и контроль</div>
+                    <p>Управление полным процессом, координация всех участников, контроль сроков и расчетов.</p>
+                </div>
+                
+                <!-- Card 5 - Wide -->
+                <div class="card">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">Постсделочное сопровождение</div>
+                    <p>Адаптация объекта, устранение юридических хвостов, интеграция в структуру заказчика.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 5: PROXITY Integration -->
+    <section style="background: linear-gradient(180deg, transparent, rgba(124, 58, 237, 0.03));">
+        <div class="container">
+            <h2 class="section-title fade-in-up">PROXITY — цифровая инфраструктура для сделок</h2>
+            <div class="proxity-block fade-in-up delay-100">
+                <div>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <p class="feature-text">Закрытый каталог проверенных активов</p>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <p class="feature-text">Доступ к квалифицированным покупателям</p>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+                                <path d="m9 12 2 2 4-4"/>
+                            </svg>
+                            <p class="feature-text">Верификация данных</p>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/>
+                            </svg>
+                            <p class="feature-text">Ускоренная коммуникация интересантов</p>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <p class="feature-text">Безопасная сделочная среда</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="proxity-mockup">
+                    <span class="mockup-label">Платформа</span>
+                    <img src="assets/images/proxity_logo_white.svg" alt="PROXITY" class="mockup-logo">
+                    <p class="mt-3" style="color: var(--text-muted); font-size: 0.9rem;">Технологичная среда для<br>поиска и верификации активов</p>
+                    <a href="https://proxity.io" target="_blank" rel="noopener" class="button primary mt-4">Перейти на PROXITY</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 6: Cases -->
+    <section>
+        <div class="container">
+            <h2 class="section-title fade-in-up">Кейсы и типы задач</h2>
+            <div class="grid-4 stagger-children">
+                <div class="case-card">
+                    <div class="case-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
+                    <h4>Продажа промышленного объекта в стрессовом статусе</h4>
+                </div>
+                <div class="case-card">
+                    <div class="case-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h4>Структурирование сделки с участием нескольких крупных кредиторов</h4>
+                </div>
+                <div class="case-card">
+                    <div class="case-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </div>
+                    <h4>Форензик группы компаний перед покупкой доли</h4>
+                </div>
+                <div class="case-card">
+                    <div class="case-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h4>Постинтеграционное сопровождение и изменение операционной модели</h4>
+                </div>
+            </div>
+            <p class="text-center fade-in-up delay-200" style="margin-top: 40px; color: var(--text-secondary);">
+                Каждый проект — индивидуальная конструкция с контролем всех этапов.
+            </p>
+        </div>
+    </section>
+
+    <!-- Block 7: Team -->
+    <section id="team" style="background: linear-gradient(180deg, rgba(124, 58, 237, 0.03), transparent);">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Команда PROXY GROUP</h2>
+            <div class="team-grid stagger-children">
+                <div class="team-card">
+                    <img src="assets/images/People/salnikov-vladimir.png" alt="Владимир Сальников" class="team-photo-img">
+                    <h4>Владимир Сальников</h4>
+                    <div class="team-role">Управляющий партнер</div>
+                    <p>Стратегическое управление и архитектура сделок высокой сложности.</p>
+                </div>
+                <div class="team-card">
+                    <img src="assets/images/People/grosul-maksim.png" alt="Максим Гросул" class="team-photo-img">
+                    <h4>Максим Гросул</h4>
+                    <div class="team-role">Партнер по сделкам и форензику</div>
+                    <p>Дьюдилл, форензик, взаимодействие с банками.</p>
+                </div>
+                <div class="team-card">
+                    <img src="assets/images/People/salnikov-oleg.png" alt="Олег Сальников" class="team-photo-img">
+                    <h4>Олег Сальников</h4>
+                    <div class="team-role">Партнер по юридическому сопровождению</div>
+                    <p>Юридическая точность, банкротные и стрессовые кейсы.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 8: Contact Form -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title fade-in-up">Опишите задачу — вернемся в течение 24 часов</h2>
+            <div class="contact-grid fade-in-up delay-100">
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Имя *</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Ваше имя" required>
+                        <div class="form-error">Please enter your name</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="company">Компания</label>
+                        <input type="text" id="company" name="company" class="form-input" placeholder="Название компании">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="contact">Контакт (телефон или email) *</label>
+                        <input type="text" id="contact" name="contact" class="form-input" placeholder="+7 (___) ___-__-__ или email@example.com" required>
+                        <div class="form-error">Please enter your contact information</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="message">Запрос *</label>
+                        <textarea id="message" name="message" class="form-textarea" placeholder="Опишите вашу задачу или вопрос" required></textarea>
+                        <div class="form-error">Please describe your request</div>
+                    </div>
+                    <button type="submit" class="button primary w-100">Отправить заявку</button>
+                    <div class="form-success">
+                        Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.
+                    </div>
+                </form>
+                <div class="contact-info">
+                    <h3>Контактная информация</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="contact-item-content">
+                            <h4>Адрес</h4>
+                            <p>Москва, Россия</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-item-content">
+                            <h4>Телефон</h4>
+                            <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div class="contact-item-content">
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@proxygroup.ru">info@proxygroup.ru</a></p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(167, 139, 250, 0.1); font-size: 0.95rem;">
+                        Работаем по всей России и международным юрисдикциям.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 9: Mini CTA Strip -->
+    <section class="mini-cta">
+        <div class="container">
+            <div class="mini-cta-content">
+                <h3>Ищете актив или покупателя уже сейчас?</h3>
+                <p>Часть объектов размещена в закрытом каталоге PROXITY</p>
+            </div>
+            <a href="https://proxity.io" target="_blank" rel="noopener" class="button outline">Открыть PROXITY</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-contacts">
+                <div class="footer-contact-item">
+                    <h4>Адрес</h4>
+                    <p>Москва, Россия</p>
+                </div>
+                <div class="footer-contact-item">
+                    <h4>Телефон</h4>
+                    <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
+                </div>
+                <div class="footer-contact-item">
+                    <h4>Email</h4>
+                    <p><a href="mailto:info@proxygroup.ru">info@proxygroup.ru</a></p>
+                </div>
+            </div>
+            <div class="footer-content">
+                <a href="index.html" class="footer-logo">
+                    <img src="assets/images/Proxy_group_logo.png" alt="PROXY GROUP" class="logo-img">
+                </a>
+                <div class="footer-links">
+                    <a href="#competencies">Компетенции</a>
+                    <a href="#team">Команда</a>
+                    <a href="#contact">Контакты</a>
+                    <a href="https://proxity.io" target="_blank" rel="noopener">PROXITY</a>
+                </div>
+            </div>
+            <div class="footer-copy">
+                © 2025 PROXY GROUP. Все права защищены. Работаем по всей России и международным юрисдикциям.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
