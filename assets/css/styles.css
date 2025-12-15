@@ -29,9 +29,9 @@
     --text-dark-secondary: #4B5563;
     
     /* Layout */
-    --radius: 4px;
-    --radius-md: 6px;
-    --radius-lg: 8px;
+    --radius: 2px;
+    --radius-md: 3px;
+    --radius-lg: 4px;
     --container-max: 1200px;
     --header-height: 72px;
     
@@ -613,7 +613,7 @@ p {
 }
 
 .person-role {
-    color: var(--accent);
+    color: var(--text-dark-secondary);
     font-size: 0.875rem;
     font-weight: 500;
     margin-bottom: 12px;
