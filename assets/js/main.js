@@ -319,6 +319,7 @@ function initSmoothScroll() {
 
 /**
  * Initialize horizontal carousels (scroll-snap based)
+ * Uses slide-based navigation instead of page-based for accurate scrolling
  */
 function initCarousels() {
     const carousels = document.querySelectorAll('[data-carousel]');
@@ -326,31 +327,67 @@ function initCarousels() {
 
     carousels.forEach((carousel) => {
         const viewport = carousel.querySelector('.carousel-viewport');
+        const track = carousel.querySelector('.carousel-track');
         const dotsContainer = carousel.querySelector('.carousel-dots');
         const prevBtn = carousel.querySelector('[data-carousel-prev]');
         const nextBtn = carousel.querySelector('[data-carousel-next]');
-        if (!viewport) return;
+        if (!viewport || !track) return;
 
         let dots = [];
 
-        function getPageWidth() {
-            return Math.max(1, viewport.clientWidth);
+        // Get all slide elements
+        function getSlides() {
+            return Array.from(track.querySelectorAll('.carousel-slide'));
         }
 
+        // Get the width of a single slide including gap
+        function getSlideWidth() {
+            const slides = getSlides();
+            if (slides.length < 2) return viewport.clientWidth;
+            
+            // Calculate actual slide width from DOM (includes gap in offset)
+            const firstSlide = slides[0];
+            const secondSlide = slides[1];
+            return secondSlide.offsetLeft - firstSlide.offsetLeft;
+        }
+
+        // Calculate how many slides are visible at once
+        function getVisibleSlides() {
+            const slideWidth = getSlideWidth();
+            if (slideWidth <= 0) return 1;
+            return Math.max(1, Math.floor(viewport.clientWidth / slideWidth));
+        }
+
+        // Get total number of navigation positions (pages)
         function getPageCount() {
-            const pageWidth = getPageWidth();
-            const maxScroll = Math.max(0, viewport.scrollWidth - pageWidth);
-            return Math.max(1, Math.round(maxScroll / pageWidth) + 1);
+            const slides = getSlides();
+            const visibleSlides = getVisibleSlides();
+            // Pages = total slides - visible slides + 1 (so last page shows last slides)
+            return Math.max(1, slides.length - visibleSlides + 1);
         }
 
+        // Get current active page based on scroll position
         function getActivePage() {
-            const pageWidth = getPageWidth();
-            return Math.min(getPageCount() - 1, Math.max(0, Math.round(viewport.scrollLeft / pageWidth)));
+            const slideWidth = getSlideWidth();
+            if (slideWidth <= 0) return 0;
+            
+            const scrollPos = viewport.scrollLeft;
+            const page = Math.round(scrollPos / slideWidth);
+            return Math.min(getPageCount() - 1, Math.max(0, page));
         }
 
+        // Scroll to specific page (slide index)
         function scrollToPage(index) {
-            const pageWidth = getPageWidth();
-            viewport.scrollTo({ left: index * pageWidth, behavior: 'smooth' });
+            const slides = getSlides();
+            if (index < 0 || index >= slides.length) return;
+            
+            const targetSlide = slides[index];
+            if (!targetSlide) return;
+            
+            viewport.scrollTo({ 
+                left: targetSlide.offsetLeft, 
+                behavior: 'smooth' 
+            });
         }
 
         function renderDots() {
@@ -373,18 +410,26 @@ function initCarousels() {
 
         function updateUI() {
             const active = getActivePage();
+            const pageCount = getPageCount();
+            
             dots.forEach((dot, idx) => dot.classList.toggle('is-active', idx === active));
 
             if (prevBtn) prevBtn.disabled = active <= 0;
-            if (nextBtn) nextBtn.disabled = active >= getPageCount() - 1;
+            if (nextBtn) nextBtn.disabled = active >= pageCount - 1;
         }
 
         function onPrev() {
-            scrollToPage(getActivePage() - 1);
+            const current = getActivePage();
+            if (current > 0) {
+                scrollToPage(current - 1);
+            }
         }
 
         function onNext() {
-            scrollToPage(getActivePage() + 1);
+            const current = getActivePage();
+            if (current < getPageCount() - 1) {
+                scrollToPage(current + 1);
+            }
         }
 
         if (prevBtn) prevBtn.addEventListener('click', onPrev);
@@ -403,8 +448,11 @@ function initCarousels() {
             window.requestAnimationFrame(updateUI);
         }, { passive: true });
 
-        renderDots();
-        updateUI();
+        // Initial setup after a brief delay to ensure layout is complete
+        requestAnimationFrame(() => {
+            renderDots();
+            updateUI();
+        });
     });
 }
 
