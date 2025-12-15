@@ -1,14 +1,14 @@
 /**
  * PROXY GROUP Landing Page - Main JavaScript
- * Handles animations, navigation, particles background, and form interactions
+ * Handles animations, navigation, carousels, and form interactions
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initParticlesCanvas();
     initScrollAnimations();
     initStickyHeader();
     initMobileMenu();
     initSmoothScroll();
+    initCarousels();
     initContactForm();
 });
 
@@ -318,6 +318,97 @@ function initSmoothScroll() {
 }
 
 /**
+ * Initialize horizontal carousels (scroll-snap based)
+ */
+function initCarousels() {
+    const carousels = document.querySelectorAll('[data-carousel]');
+    if (!carousels.length) return;
+
+    carousels.forEach((carousel) => {
+        const viewport = carousel.querySelector('.carousel-viewport');
+        const dotsContainer = carousel.querySelector('.carousel-dots');
+        const prevBtn = carousel.querySelector('[data-carousel-prev]');
+        const nextBtn = carousel.querySelector('[data-carousel-next]');
+        if (!viewport) return;
+
+        let dots = [];
+
+        function getPageWidth() {
+            return Math.max(1, viewport.clientWidth);
+        }
+
+        function getPageCount() {
+            const pageWidth = getPageWidth();
+            const maxScroll = Math.max(0, viewport.scrollWidth - pageWidth);
+            return Math.max(1, Math.round(maxScroll / pageWidth) + 1);
+        }
+
+        function getActivePage() {
+            const pageWidth = getPageWidth();
+            return Math.min(getPageCount() - 1, Math.max(0, Math.round(viewport.scrollLeft / pageWidth)));
+        }
+
+        function scrollToPage(index) {
+            const pageWidth = getPageWidth();
+            viewport.scrollTo({ left: index * pageWidth, behavior: 'smooth' });
+        }
+
+        function renderDots() {
+            if (!dotsContainer) return;
+
+            const pageCount = getPageCount();
+            dotsContainer.innerHTML = '';
+            dots = [];
+
+            for (let i = 0; i < pageCount; i++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'carousel-dot';
+                btn.setAttribute('aria-label', `Перейти к странице ${i + 1}`);
+                btn.addEventListener('click', () => scrollToPage(i));
+                dotsContainer.appendChild(btn);
+                dots.push(btn);
+            }
+        }
+
+        function updateUI() {
+            const active = getActivePage();
+            dots.forEach((dot, idx) => dot.classList.toggle('is-active', idx === active));
+
+            if (prevBtn) prevBtn.disabled = active <= 0;
+            if (nextBtn) nextBtn.disabled = active >= getPageCount() - 1;
+        }
+
+        function onPrev() {
+            scrollToPage(getActivePage() - 1);
+        }
+
+        function onNext() {
+            scrollToPage(getActivePage() + 1);
+        }
+
+        if (prevBtn) prevBtn.addEventListener('click', onPrev);
+        if (nextBtn) nextBtn.addEventListener('click', onNext);
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            window.clearTimeout(resizeTimer);
+            resizeTimer = window.setTimeout(() => {
+                renderDots();
+                updateUI();
+            }, 150);
+        });
+
+        viewport.addEventListener('scroll', () => {
+            window.requestAnimationFrame(updateUI);
+        }, { passive: true });
+
+        renderDots();
+        updateUI();
+    });
+}
+
+/**
  * Initialize contact form with validation
  */
 function initContactForm() {
@@ -342,24 +433,24 @@ function initContactForm() {
         // Name validation
         const name = formData.get('name')?.trim();
         if (!name || name.length < 2) {
-            showError('name', 'Please enter your name');
+            showError('name', 'Пожалуйста, укажите имя');
             isValid = false;
         }
 
         // Contact validation (phone or email)
         const contact = formData.get('contact')?.trim();
         if (!contact) {
-            showError('contact', 'Please enter your contact information');
+            showError('contact', 'Пожалуйста, укажите телефон или email');
             isValid = false;
         } else if (!isValidContact(contact)) {
-            showError('contact', 'Please enter a valid email or phone number');
+            showError('contact', 'Укажите корректный телефон или email');
             isValid = false;
         }
 
         // Message validation
         const message = formData.get('message')?.trim();
         if (!message || message.length < 10) {
-            showError('message', 'Please describe your request (at least 10 characters)');
+            showError('message', 'Пожалуйста, опишите запрос (минимум 10 символов)');
             isValid = false;
         }
 
@@ -383,7 +474,7 @@ function initContactForm() {
             }
         } catch (error) {
             console.error('Form submission error:', error);
-            alert('An error occurred. Please try again or contact us directly.');
+            alert('Произошла ошибка. Попробуйте еще раз или свяжитесь с нами напрямую.');
         } finally {
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
@@ -439,4 +530,3 @@ document.querySelectorAll('.button.primary, .button.white').forEach(button => {
         trackEvent('CTA', 'click', buttonText);
     });
 });
-
