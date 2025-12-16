@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initCarousels();
     initContactForm();
+    initParallaxSections();
 });
 
 /**
@@ -578,3 +579,46 @@ document.querySelectorAll('.button.primary, .button.white').forEach(button => {
         trackEvent('CTA', 'click', buttonText);
     });
 });
+
+/**
+ * Initialize parallax effect for sections with parallax-hero class
+ * Creates sticky effect with next section overlaying
+ */
+function initParallaxSections() {
+    const parallaxSections = document.querySelectorAll('section.parallax-hero');
+    if (!parallaxSections.length) return;
+
+    parallaxSections.forEach((section) => {
+        // Force sticky positioning via inline styles
+        section.style.cssText += 'position: -webkit-sticky !important; position: sticky !important; top: 0 !important; z-index: 10 !important; margin-bottom: 0 !important;';
+
+        // Ensure next section overlays
+        const nextSection = section.nextElementSibling;
+        if (nextSection && nextSection.tagName === 'SECTION') {
+            nextSection.style.cssText += 'position: relative !important; z-index: 20 !important; margin-top: 0 !important;';
+        }
+    });
+
+    // Also handle scroll to ensure sticky works
+    let ticking = false;
+    function updateParallax() {
+        parallaxSections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            const isSticky = rect.top <= 0 && rect.bottom > 0;
+            
+            if (isSticky) {
+                section.style.position = 'sticky';
+                section.style.top = '0';
+                section.style.zIndex = '10';
+            }
+        });
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
+}

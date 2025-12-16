@@ -28,10 +28,10 @@
     --text-dark: #111111;
     --text-dark-secondary: #555555;
     
-    /* Layout - Sharp corners like DGP */
-    --radius: 0;
-    --radius-md: 0;
-    --radius-lg: 2px;
+    /* Layout - Harmonious rounded corners */
+    --radius: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
     --container-max: 1280px;
     --header-height: 80px;
     
@@ -62,6 +62,8 @@ body {
     font-size: 16px;
     min-height: 100vh;
     overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
 }
 
 a { 
@@ -96,8 +98,30 @@ section:last-of-type {
     border-bottom: none;
 }
 
-.section-surface {
+/* Чередование фонов секций: графитовый, черный, графитовый, черный... */
+/* Начинаем с графитового для первой секции после hero */
+/* Используем :not(:first-child) для всех секций после первой (hero) */
+body > section:not(:first-child):not(.parallax-hero):nth-child(even) {
     background: var(--bg-surface);
+}
+
+body > section:not(:first-child):not(.parallax-hero):nth-child(odd) {
+    background: var(--bg-dark);
+}
+
+/* Hero секция имеет свой фон (изображение или темный) */
+.section-hero {
+    background-color: var(--bg-dark);
+}
+
+/* Переопределение для секций с классом section-surface - они должны быть графитовыми */
+.section-surface:not(.parallax-hero) {
+    background: var(--bg-surface);
+}
+
+/* Но если section-surface нечетная по счету (после hero), делаем черной для чередования */
+body > section.section-surface:not(:first-child):not(.parallax-hero):nth-child(odd) {
+    background: var(--bg-dark);
 }
 
 /* --- Typography --- */
@@ -151,7 +175,7 @@ p {
     justify-content: center;
     align-items: center;
     padding: 16px 32px;
-    border-radius: 0;
+    border-radius: var(--radius-md);
     font-weight: 600;
     font-size: 0.9375rem;
     cursor: pointer;
@@ -249,7 +273,7 @@ p {
 
 .nav-link {
     padding: 12px 18px;
-    border-radius: 0;
+    border-radius: var(--radius);
     color: var(--text-muted);
     font-weight: 500;
     font-size: 0.875rem;
@@ -285,7 +309,7 @@ p {
     color: var(--text-white);
     cursor: pointer;
     padding: 8px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
 }
 
 .mobile-menu-toggle:hover {
@@ -334,12 +358,124 @@ p {
 
 /* --- Hero Section --- */
 .section-hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     padding-top: 160px;
     padding-bottom: 100px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background-color: var(--bg-dark);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+/* Если есть фоновое изображение через inline style, добавляем затемнение */
+.section-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background: transparent;
+    pointer-events: none;
+}
+
+/* Затемнение для секций с фоновым изображением - покрывает всю высоту секции */
+.section-hero[style*="background-image"]::before {
+    background: rgba(13, 13, 15, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    width: 100%;
+    height: calc(100% + 1px);
+    min-height: calc(100% + 1px);
+}
+
+.section-hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Параллакс эффект для hero-секции на странице компетенций */
+.section-hero.parallax-hero {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    min-height: auto;
+    margin-bottom: 0;
+}
+
+.section-hero.parallax-hero + .section-surface {
+    position: relative;
+    z-index: 20;
+    background: var(--bg-surface);
+    margin-top: 0;
+}
+
+/* Параллакс эффект для обычных секций */
+section.parallax-hero {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    margin-bottom: 0;
+    will-change: transform;
+}
+
+/* Специфичные стили для секции "Что мы делаем" */
+section#what-we-do.parallax-hero {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Специфичные стили для секции "Когда к нам обращаются" */
+section#when-contact.parallax-hero {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Специфичные стили для секции "Для каких клиентов мы работаем" */
+section#clients.parallax-hero {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Фон для parallax-hero секций в зависимости от их класса */
+section.parallax-hero:not(.section-surface) {
+    background: var(--bg-dark);
+}
+
+section.parallax-hero.section-surface {
+    background: var(--bg-surface);
+}
+
+/* Следующая секция после parallax-hero должна быть поверх */
+section.parallax-hero + section {
+    position: relative;
+    z-index: 20;
+    margin-top: 0;
+}
+
+/* Убеждаемся, что следующая секция имеет правильный фон */
+section.parallax-hero + .section-surface {
+    background: var(--bg-surface) !important;
+}
+
+section.parallax-hero + section:not(.section-surface) {
+    background: var(--bg-dark) !important;
 }
 
 .hero-grid {
@@ -377,6 +513,8 @@ p {
     display: grid;
     gap: 0;
     margin-top: 48px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
 }
 
 .hero-theses li {
@@ -390,8 +528,15 @@ p {
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
+.hero-theses li:first-child {
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+}
+
 .hero-theses li:last-child {
     border-bottom: none;
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
 }
 
 /* --- Cards & Grid --- */
@@ -417,9 +562,10 @@ p {
 .card {
     background: var(--bg-card);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0;
+    border-radius: var(--radius-md);
     padding: 32px;
     transition: var(--transition);
+    position: relative;
 }
 
 .card:hover {
@@ -465,11 +611,44 @@ p {
     color: var(--text-dark-secondary);
 }
 
+/* Номера карточек */
+.card-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 10rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.2;
+    pointer-events: none;
+    transform: translate(-12px, -20px);
+    z-index: 0;
+    user-select: none;
+}
+
+.card.card-light .card-number {
+    opacity: 0.18;
+}
+
+.card p,
+.card .card-title {
+    position: relative;
+    z-index: 1;
+}
+
 /* --- Two Column Layout --- */
 .two-col {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
+    align-items: stretch;
+}
+
+.two-col .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* --- Checklist --- */
@@ -524,7 +703,7 @@ p {
 .carousel-btn {
     width: 40px;
     height: 40px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: transparent;
     color: var(--text-light);
@@ -598,6 +777,7 @@ p {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    border-radius: var(--radius-md);
 }
 
 .person-media {
@@ -662,9 +842,12 @@ p {
 
 /* --- Footer --- */
 footer {
+    position: relative;
+    z-index: 30;
     padding: 80px 0 40px;
     background: var(--bg-dark);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 0;
 }
 
 .footer-contacts {
@@ -763,7 +946,7 @@ footer {
 .contact-form {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     padding: 40px;
 }
 
@@ -789,7 +972,7 @@ footer {
     padding: 14px 16px;
     background: #F9FAFB;
     border: 1px solid #E5E7EB;
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
     color: var(--text-dark);
     font-family: var(--font-main);
     font-size: 0.9375rem;
@@ -834,7 +1017,7 @@ footer {
     padding: 16px;
     background: #ECFDF5;
     border: 1px solid #A7F3D0;
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
     color: #059669;
     text-align: center;
     margin-top: 16px;
@@ -847,6 +1030,9 @@ footer {
 
 .contact-info {
     padding-top: 10px;
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
 }
 
 .contact-info h3 {
@@ -865,7 +1051,7 @@ footer {
     height: 44px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius);
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1046,6 +1232,25 @@ footer {
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+    
+    .contact-info {
+        position: static;
+    }
+    
+    /* Отключение параллакса на мобильных устройствах */
+    section.parallax-hero {
+        position: static !important;
+        z-index: auto !important;
+    }
+    
+    section.parallax-hero + section {
+        position: static !important;
+        z-index: auto !important;
+    }
+    
+    .section-hero.parallax-hero {
+        position: static !important;
     }
 }
 
