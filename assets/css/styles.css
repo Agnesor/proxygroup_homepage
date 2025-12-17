@@ -98,6 +98,63 @@ section:last-of-type {
     border-bottom: none;
 }
 
+/* Закругленные углы сверху для секций от "Кто мы" до "Кейсы" - эффект наложения карточек */
+/* Первая секция "Кто мы" - вторая секция после hero */
+body > section:not(.section-hero):nth-child(2),
+/* Что мы делаем */
+section#what-we-do,
+/* Когда к нам обращаются (вторая секция с этим id) */
+section#when-contact:nth-of-type(2),
+/* Для каких клиентов мы работаем */
+section#clients,
+/* С какими активами мы работаем */
+section#assets,
+/* Технологии PROXY */
+section#infrastructure,
+/* Наш подход к сделкам */
+section#approach,
+/* Кейсы */
+section#cases {
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+    margin-top: -20px;
+    padding-top: 120px;
+    position: relative;
+}
+
+/* Увеличиваем z-index для каждой последующей секции для эффекта наложения */
+body > section:not(.section-hero):nth-child(2) {
+    z-index: 1;
+}
+
+section#what-we-do {
+    z-index: 2;
+}
+
+section#when-contact:nth-of-type(2) {
+    z-index: 3;
+}
+
+section#clients {
+    z-index: 4;
+}
+
+section#assets {
+    z-index: 5;
+}
+
+section#infrastructure {
+    z-index: 6;
+}
+
+section#approach {
+    z-index: 7;
+}
+
+section#cases {
+    z-index: 8;
+}
+
 /* Чередование фонов секций: графитовый, черный, графитовый, черный... */
 /* Начинаем с графитового для первой секции после hero */
 /* Используем :not(:first-child) для всех секций после первой (hero) */
@@ -372,8 +429,20 @@ p {
     overflow: hidden;
 }
 
+/* Скрываем border-bottom для секций с фоновыми изображениями, чтобы оверлей полностью покрывал */
+.section-hero[style*="background-image"],
+.section-hero.hero-slider {
+    border-bottom: none;
+}
+
+/* Для hero секций с изображениями (кроме слайдера) - растягиваем изображение */
+.section-hero:not(.hero-slider)[style*="background-image"] {
+    background-size: 100% 100%;
+    background-position: center;
+}
+
 /* Если есть фоновое изображение через inline style, добавляем затемнение */
-.section-hero::before {
+.section-hero:not(.hero-slider)::before {
     content: '';
     position: absolute;
     top: 0;
@@ -386,21 +455,78 @@ p {
 }
 
 /* Затемнение для секций с фоновым изображением - покрывает всю высоту секции */
-.section-hero[style*="background-image"]::before {
-    background: rgba(13, 13, 15, 0.5);
+.section-hero:not(.hero-slider)[style*="background-image"]::before {
+    background: rgba(13, 13, 15, 0.8);
     position: absolute;
-    top: 0;
+    top: -1px;
     left: 0;
     right: 0;
-    bottom: -1px;
+    bottom: -3px;
     width: 100%;
-    height: calc(100% + 1px);
-    min-height: calc(100% + 1px);
+    height: calc(100% + 4px);
+    min-height: calc(100% + 4px);
+    z-index: 0;
+    pointer-events: none;
 }
 
 .section-hero .container {
     position: relative;
     z-index: 1;
+}
+
+/* Hero Slider */
+.hero-slider {
+    position: relative;
+}
+
+.hero-slider-slides {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-slider-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 0;
+}
+
+.hero-slider-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Затемнение для слайдов */
+.hero-slider-slide::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    width: 100%;
+    height: calc(100% + 4px);
+    min-height: calc(100% + 4px);
+    background: rgba(13, 13, 15, 0.8);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Убеждаемся, что контент поверх слайдов */
+.hero-slider .container {
+    position: relative;
+    z-index: 10;
 }
 
 /* Параллакс эффект для hero-секции на странице компетенций */
@@ -773,7 +899,7 @@ section.parallax-hero + section:not(.section-surface) {
 
 /* --- Person Cards (Team) --- */
 .person-card {
-    padding: 0;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -786,6 +912,8 @@ section.parallax-hero + section:not(.section-surface) {
     aspect-ratio: 3 / 4;
     overflow: hidden;
     background: #E5E7EB;
+    border-radius: var(--radius);
+    margin-bottom: 16px;
 }
 
 .person-media img {
@@ -813,7 +941,10 @@ section.parallax-hero + section:not(.section-surface) {
 }
 
 .person-info {
-    padding: 20px 24px 24px;
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .person-name {
@@ -834,10 +965,28 @@ section.parallax-hero + section:not(.section-surface) {
 }
 
 .person-desc {
-    font-size: 0.875rem;
-    line-height: 1.65;
-    margin-bottom: 0;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
     color: var(--text-dark-secondary);
+}
+
+.person-email {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    transition: var(--transition);
+}
+
+.person-email:hover {
+    color: var(--accent);
+    opacity: 0.8;
+    text-decoration: underline;
 }
 
 /* --- Footer --- */
@@ -1174,6 +1323,60 @@ footer {
     
     .mobile-menu {
         display: flex;
+    }
+    
+    /* Убеждаемся, что секции с закругленными углами имеют правильный z-index на планшетах */
+    body > section:not(.section-hero):nth-child(2),
+    section#what-we-do,
+    section#when-contact:nth-of-type(2),
+    section#clients,
+    section#assets,
+    section#infrastructure,
+    section#approach,
+    section#cases {
+        position: relative !important;
+    }
+    
+    body > section:not(.section-hero):nth-child(2) {
+        z-index: 1 !important;
+    }
+    
+    section#what-we-do {
+        z-index: 2 !important;
+    }
+    
+    section#when-contact:nth-of-type(2) {
+        z-index: 3 !important;
+    }
+    
+    section#clients {
+        z-index: 4 !important;
+    }
+    
+    section#assets {
+        z-index: 5 !important;
+    }
+    
+    section#infrastructure {
+        z-index: 6 !important;
+    }
+    
+    section#approach {
+        z-index: 7 !important;
+    }
+    
+    section#cases {
+        z-index: 8 !important;
+    }
+    
+    /* Убеждаемся, что секция "Кейсы" накладывается поверх "Наш подход к сделкам" */
+    section#approach.parallax-hero {
+        z-index: 7 !important;
+    }
+    
+    section#cases.section-surface {
+        z-index: 8 !important;
+        position: relative !important;
     }
 }
 
