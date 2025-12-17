@@ -127,6 +127,7 @@ section#cases {
 /* Увеличиваем z-index для каждой последующей секции для эффекта наложения */
 body > section:not(.section-hero):nth-child(2) {
     z-index: 1;
+    padding-top: 120px;
 }
 
 section#what-we-do {
@@ -204,8 +205,27 @@ h2 {
 }
 
 h2.section-title {
-    text-align: center;
+    text-align: left;
     margin-bottom: 56px;
+    position: relative;
+    padding-top: 24px;
+}
+
+/* Декоративные клепки над заголовками секций */
+h2.section-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 8px;
+    background-image: 
+        radial-gradient(circle, transparent 1.5px, var(--accent) 1.5px, var(--accent) 3.5px, transparent 3.5px),
+        radial-gradient(circle, transparent 1.5px, var(--accent) 1.5px, var(--accent) 3.5px, transparent 3.5px),
+        radial-gradient(circle, transparent 1.5px, var(--accent) 1.5px, var(--accent) 3.5px, transparent 3.5px);
+    background-size: 8px 8px;
+    background-position: 0 0, 16px 0, 32px 0;
+    background-repeat: no-repeat;
 }
 
 h3 {
@@ -785,6 +805,22 @@ section.parallax-hero + section:not(.section-surface) {
 .card.card-light p,
 .card.card-light li {
     color: var(--text-dark-secondary);
+}
+
+/* Акцентный элемент для кейсов */
+.case-card {
+    position: relative;
+    padding-left: 40px;
+}
+
+.case-accent {
+    position: absolute;
+    left: 0;
+    top: 32px;
+    width: 3px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 2px;
 }
 
 /* Номера карточек */
