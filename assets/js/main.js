@@ -650,17 +650,8 @@ function initHeroSlider() {
         slides[currentSlide].classList.add('active');
     }
 
-    // Start the slider
-    let sliderTimer = setInterval(nextSlide, slideInterval);
-
-    // Pause on hover (optional)
-    heroSection.addEventListener('mouseenter', () => {
-        clearInterval(sliderTimer);
-    });
-
-    heroSection.addEventListener('mouseleave', () => {
-        sliderTimer = setInterval(nextSlide, slideInterval);
-    });
+    // Start the slider - работает непрерывно, независимо от наведения мыши
+    setInterval(nextSlide, slideInterval);
 
     // Ensure first slide is visible on load
     if (slides.length > 0) {

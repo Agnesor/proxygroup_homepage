@@ -323,6 +323,26 @@ p {
     opacity: 0.8;
 }
 
+/* Текстовый логотип */
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-white);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    transition: var(--transition);
+}
+
+.logo-text-accent {
+    color: var(--accent);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.logo:hover .logo-text {
+    opacity: 0.9;
+}
+
 /* Main Navigation */
 .nav-main {
     display: flex;
@@ -716,6 +736,26 @@ section.parallax-hero + section:not(.section-surface) {
     line-height: 1.65;
 }
 
+/* Статистические показатели в карточках */
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 0.9375rem;
+    color: var(--text-dark-secondary);
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.card.card-light .stat-label {
+    color: var(--text-dark-secondary);
+}
+
 /* Light Cards on Dark Background */
 .card.card-light {
     background: var(--card-bg);
@@ -763,6 +803,28 @@ section.parallax-hero + section:not(.section-surface) {
 .card .card-title {
     position: relative;
     z-index: 1;
+}
+
+/* --- Tags --- */
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-transform: none;
+    letter-spacing: 0;
 }
 
 /* --- Two Column Layout --- */
@@ -1058,6 +1120,20 @@ footer {
 
 .footer-logo:hover .logo-img {
     opacity: 0.9;
+}
+
+/* Текстовый логотип в футере */
+.footer-logo .logo-text {
+    font-size: 1.25rem;
+    opacity: 0.8;
+}
+
+.footer-logo .logo-text-accent {
+    font-size: 1.05rem;
+}
+
+.footer-logo:hover .logo-text {
+    opacity: 1;
 }
 
 .footer-links {
