@@ -116,7 +116,9 @@ section#infrastructure,
 /* Наш подход к сделкам */
 section#approach,
 /* Кейсы */
-section#cases {
+section#cases,
+/* Сетка компетенций на странице компетенций */
+section#competencies-grid {
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
     margin-top: -20px;
@@ -629,6 +631,14 @@ section#clients.parallax-hero {
     z-index: 10;
 }
 
+/* Специфичные стили для секции "Наш подход к сделкам" */
+section#approach.parallax-hero {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
 /* Фон для parallax-hero секций в зависимости от их класса */
 section.parallax-hero:not(.section-surface) {
     background: var(--bg-dark);
@@ -1102,7 +1112,7 @@ footer {
     position: relative;
     z-index: 100;
     padding: 80px 0 40px;
-    background: var(--bg-dark);
+    background: var(--bg-surface);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     margin-top: 0;
 }
@@ -1173,7 +1183,7 @@ footer {
 }
 
 .footer-logo .logo-text-accent {
-    font-size: 1.05rem;
+    font-size: 1.25rem;
 }
 
 .footer-logo:hover .logo-text {
