@@ -501,9 +501,9 @@ p {
 /* Затемнение для секций с фоновым изображением - покрывает всю высоту секции */
 .section-hero:not(.hero-slider)[style*="background-image"]::before {
     background: linear-gradient(to bottom, 
-        rgba(13, 13, 15, 0.6) 0%,
-        rgba(13, 13, 15, 0.75) 50%,
-        rgba(13, 13, 15, 0.95) 85%,
+        rgba(13, 13, 15, 0.5) 0%,
+        rgba(13, 13, 15, 0.7) 40%,
+        rgba(13, 13, 15, 0.9) 70%,
         rgba(13, 13, 15, 1) 100%);
     position: absolute;
     top: -1px;
@@ -646,6 +646,70 @@ section.parallax-hero:not(.section-surface) {
 
 section.parallax-hero.section-surface {
     background: var(--bg-surface);
+}
+
+/* Переопределение фона для секции компетенций на странице компетенций */
+section#competencies-grid {
+    background: var(--bg-dark) !important;
+}
+
+/* Компактные стили для секции компетенций */
+section#competencies-grid .grid-2 {
+    gap: 16px;
+}
+
+section#competencies-grid .card {
+    padding: 24px;
+}
+
+section#competencies-grid .card-title {
+    margin-bottom: 10px;
+    font-size: 1.0625rem;
+}
+
+section#competencies-grid .card p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* Акцентный элемент для карточек компетенций */
+section#competencies-grid .competency-card {
+    position: relative;
+    padding-left: 32px;
+}
+
+section#competencies-grid .competency-accent {
+    position: absolute;
+    left: 0;
+    top: 24px;
+    width: 3px;
+    height: 32px;
+    background: var(--accent);
+}
+
+/* Переопределение фона для секции "Наш подход" на странице компетенций */
+section#approach.parallax-hero {
+    background: var(--bg-surface) !important;
+}
+
+/* Переопределение фона для секции команды на странице команды */
+section#team-grid {
+    background: var(--bg-dark) !important;
+}
+
+/* Переопределение фона футера на странице команды */
+body:has(section#team-grid) footer {
+    background: var(--bg-surface) !important;
+}
+
+/* Переопределение фона для секции контактов на странице контактов */
+section#contact-section {
+    background: var(--bg-dark) !important;
+}
+
+/* Переопределение фона футера на странице контактов */
+body:has(section#contact-section) footer {
+    background: var(--bg-surface) !important;
 }
 
 /* Следующая секция после parallax-hero должна быть поверх */
@@ -1112,7 +1176,7 @@ footer {
     position: relative;
     z-index: 100;
     padding: 80px 0 40px;
-    background: var(--bg-surface);
+    background: var(--bg-dark);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     margin-top: 0;
 }
