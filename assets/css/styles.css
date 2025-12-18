@@ -345,7 +345,7 @@ p {
 
 /* Текстовый логотип */
 .logo-text {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-white);
     letter-spacing: -0.02em;
@@ -477,9 +477,9 @@ p {
     border-bottom: none;
 }
 
-/* Для hero секций с изображениями (кроме слайдера) - растягиваем изображение */
+/* Для hero секций с изображениями (кроме слайдера) - кадрируем изображение */
 .section-hero:not(.hero-slider)[style*="background-image"] {
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
 }
 
