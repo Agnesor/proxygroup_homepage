@@ -1100,7 +1100,7 @@ section.parallax-hero + section:not(.section-surface) {
 /* --- Footer --- */
 footer {
     position: relative;
-    z-index: 30;
+    z-index: 100;
     padding: 80px 0 40px;
     background: var(--bg-dark);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -1577,6 +1577,18 @@ footer {
     
     .section-hero.parallax-hero {
         position: static !important;
+    }
+    
+    /* Специально для секции "Когда к нам обращаются" - отключаем sticky */
+    section#when-contact.parallax-hero {
+        position: static !important;
+        z-index: auto !important;
+    }
+    
+    /* Футер всегда поверх всех секций */
+    footer {
+        z-index: 100 !important;
+        position: relative !important;
     }
 }
 
