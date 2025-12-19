@@ -73,7 +73,7 @@
     <!-- Team Grid -->
     <section id="team-grid" class="section-surface" style="padding-top: 60px;">
         <div class="container">
-            <div class="grid-3 stagger-children">
+            <div class="grid-4 stagger-children">
                 <!-- Vladimir Salnikov -->
                 <div class="card card-light person-card">
                     <div class="person-media">
@@ -122,6 +122,7 @@
                         <h3 class="person-name">Илья Гражданкин</h3>
                         <div class="person-role">Партнер</div>
                         <p class="person-desc">Более 15 лет в инвестиционных подразделениях крупнейших банков, инвестиционная аналитика, оценка объектов, финансовые модели.</p>
+                        <a href="mailto:i.grazhdankin@proxygroup.ru" class="person-email">i.grazhdankin@proxygroup.ru</a>
                     </div>
                 </div>
 
@@ -134,12 +135,39 @@
                         <h3 class="person-name">Денис Ершов</h3>
                         <div class="person-role">Партнер</div>
                         <p class="person-desc">Председатель СРО электронных торговых площадок, более 12 лет проведения коммерческих торгов, включая продажу стрессовых активов.</p>
+                        <a href="mailto:d.ershov@proxygroup.ru" class="person-email">d.ershov@proxygroup.ru</a>
+                    </div>
+                </div>
+
+                <!-- Yuri Khlobystov -->
+                <div class="card card-light person-card">
+                    <div class="person-media">
+                        <div class="person-placeholder" aria-hidden="true">ЮХ</div>
+                    </div>
+                    <div class="person-info">
+                        <h3 class="person-name">Юрий Хлобыстов</h3>
+                        <div class="person-role">Менеджер проектов</div>
+                        <p class="person-desc">Специалист по работе с производственным сектором с опытом антикризисного управления крупнейшими компаниями более 20 лет.</p>
+                        <a href="mailto:y.khlobystov@proxygroup.ru" class="person-email">y.khlobystov@proxygroup.ru</a>
+                    </div>
+                </div>
+
+                <!-- Georgy Osipov -->
+                <div class="card card-light person-card">
+                    <div class="person-media">
+                        <div class="person-placeholder" aria-hidden="true">ГО</div>
+                    </div>
+                    <div class="person-info">
+                        <h3 class="person-name">Георгий Осипов</h3>
+                        <div class="person-role">Менеджер проектов</div>
+                        <p class="person-desc">Специалист по работе с недвижимостью и цифровыми активами.</p>
+                        <a href="mailto:g.osipov@proxygroup.ru" class="person-email">g.osipov@proxygroup.ru</a>
                     </div>
                 </div>
             </div>
 
             <div class="text-center fade-in-up" style="margin-top: 48px;">
-                <a href="contacts.html" class="button primary">Направить запрос</a>
+                <a href="#" class="button primary" data-modal-open="contact-modal">Обсудить задачу</a>
             </div>
         </div>
     </section>
@@ -177,6 +205,45 @@
             </div>
         </div>
     </footer>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-overlay" data-modal-close="contact-modal"></div>
+        <div class="modal-content">
+            <button class="modal-close" data-modal-close="contact-modal" aria-label="Закрыть">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h2 class="modal-title">Обсудить задачу</h2>
+            <form id="contact-modal-form" class="contact-form">
+                <div class="form-group">
+                    <label class="form-label" for="modal-name">Имя *</label>
+                    <input type="text" id="modal-name" name="name" class="form-input" placeholder="Ваше имя" required>
+                    <div class="form-error">Пожалуйста, укажите имя</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="modal-company">Компания</label>
+                    <input type="text" id="modal-company" name="company" class="form-input" placeholder="Название компании">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="modal-contact">Телефон *</label>
+                    <input type="text" id="modal-contact" name="contact" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                    <div class="form-error">Пожалуйста, укажите телефон</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="modal-message">Сообщение</label>
+                    <textarea id="modal-message" name="message" class="form-textarea" placeholder="Введите текст сообщения"></textarea>
+                    <div class="form-error">Пожалуйста, введите текст сообщения</div>
+                </div>
+                <button type="submit" class="button primary w-100">Направить запрос</button>
+                <div class="form-success">
+                    Спасибо! Запрос отправлен. Мы свяжемся с вами в ближайшее время.
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>

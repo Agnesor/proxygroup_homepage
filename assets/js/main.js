@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initParallaxSections();
     initHeroSlider();
+    initModal();
 });
 
 /**
@@ -463,7 +464,17 @@ function initCarousels() {
  */
 function initContactForm() {
     const form = document.getElementById('contact-form');
-    if (!form) return;
+    const modalForm = document.getElementById('contact-modal-form');
+    
+    if (form) {
+        setupForm(form);
+    }
+    if (modalForm) {
+        setupForm(modalForm);
+    }
+}
+
+function setupForm(form) {
 
     const submitBtn = form.querySelector('button[type="submit"]');
     const successMessage = form.querySelector('.form-success');
@@ -487,22 +498,17 @@ function initContactForm() {
             isValid = false;
         }
 
-        // Contact validation (phone or email)
+        // Contact validation (phone only)
         const contact = formData.get('contact')?.trim();
         if (!contact) {
-            showError('contact', 'Пожалуйста, укажите телефон или email');
+            showError('contact', 'Пожалуйста, укажите телефон');
             isValid = false;
-        } else if (!isValidContact(contact)) {
-            showError('contact', 'Укажите корректный телефон или email');
+        } else if (!isValidPhone(contact)) {
+            showError('contact', 'Укажите корректный номер телефона');
             isValid = false;
         }
 
-        // Message validation
-        const message = formData.get('message')?.trim();
-        if (!message || message.length < 10) {
-            showError('message', 'Пожалуйста, опишите запрос (минимум 10 символов)');
-            isValid = false;
-        }
+        // Message is optional, no validation needed
 
         if (!isValid) return;
 
@@ -520,7 +526,13 @@ function initContactForm() {
                 successMessage.classList.add('show');
                 setTimeout(() => {
                     successMessage.classList.remove('show');
-                }, 5000);
+                    // Close modal if form is in modal
+                    const modal = form.closest('.modal');
+                    if (modal) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }, 3000);
             }
         } catch (error) {
             console.error('Form submission error:', error);
@@ -542,11 +554,7 @@ function initContactForm() {
         }
     }
 
-    function isValidContact(value) {
-        // Check if it's a valid email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (emailRegex.test(value)) return true;
-
+    function isValidPhone(value) {
         // Check if it's a valid phone (basic check)
         const phoneRegex = /^[\d\s\-\+\(\)]{7,}$/;
         return phoneRegex.test(value);
@@ -656,5 +664,54 @@ function initHeroSlider() {
     // Ensure first slide is visible on load
     if (slides.length > 0) {
         slides[0].classList.add('active');
+    }
+}
+
+/**
+ * Initialize modal functionality
+ */
+function initModal() {
+    // Open modal
+    document.querySelectorAll('[data-modal-open]').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modalId = trigger.getAttribute('data-modal-open');
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                openModal(modal);
+            }
+        });
+    });
+
+    // Close modal
+    document.querySelectorAll('[data-modal-close]').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modalId = trigger.getAttribute('data-modal-close');
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                closeModal(modal);
+            }
+        });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const openModal = document.querySelector('.modal.active');
+            if (openModal) {
+                closeModal(openModal);
+            }
+        }
+    });
+
+    function openModal(modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
     }
 }

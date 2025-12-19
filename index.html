@@ -72,7 +72,7 @@
                     <p class="hero-desc">Брокеридж и сопровождение высокобюджетных сделок<br>с управлением рисками на всех этапах</p>
 
                     <div class="hero-buttons">
-                        <a href="contacts.html" class="button primary">Обсудить задачу</a>
+                        <a href="#" class="button primary" data-modal-open="contact-modal">Обсудить задачу</a>
                     </div>
                 </div>
             </div>
@@ -260,7 +260,7 @@
                 </div>
             </div>
             <div class="text-center fade-in-up" style="margin-top: 48px;">
-                <a href="contacts.html" class="button primary">Обсудить задачу и формат работы</a>
+                <a href="#" class="button primary" data-modal-open="contact-modal">Обсудить задачу и формат работы</a>
             </div>
         </div>
     </section>
@@ -298,6 +298,45 @@
             </div>
         </div>
     </footer>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-overlay" data-modal-close="contact-modal"></div>
+        <div class="modal-content">
+            <button class="modal-close" data-modal-close="contact-modal" aria-label="Закрыть">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h2 class="modal-title">Обсудить задачу</h2>
+            <form id="contact-modal-form" class="contact-form">
+                <div class="form-group">
+                    <label class="form-label" for="modal-name">Имя *</label>
+                    <input type="text" id="modal-name" name="name" class="form-input" placeholder="Ваше имя" required>
+                    <div class="form-error">Пожалуйста, укажите имя</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="modal-company">Компания</label>
+                    <input type="text" id="modal-company" name="company" class="form-input" placeholder="Название компании">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="modal-contact">Телефон *</label>
+                    <input type="text" id="modal-contact" name="contact" class="form-input" placeholder="+7 (___) ___-__-__" required>
+                    <div class="form-error">Пожалуйста, укажите телефон</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="modal-message">Сообщение</label>
+                    <textarea id="modal-message" name="message" class="form-textarea" placeholder="Введите текст сообщения"></textarea>
+                    <div class="form-error">Пожалуйста, введите текст сообщения</div>
+                </div>
+                <button type="submit" class="button primary w-100">Направить запрос</button>
+                <div class="form-success">
+                    Спасибо! Запрос отправлен. Мы свяжемся с вами в ближайшее время.
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
