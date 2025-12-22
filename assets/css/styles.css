@@ -119,11 +119,22 @@ section#approach,
 section#cases,
 /* Сетка компетенций на странице компетенций */
 section#competencies-grid {
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
     margin-top: -20px;
     padding-top: 120px;
     position: relative;
+    border-top: none;
+}
+
+/* Закругления применяются только когда секция становится sticky */
+section#what-we-do.parallax-hero.sticky-rounded,
+section#when-contact.parallax-hero.sticky-rounded,
+section#clients.parallax-hero.sticky-rounded,
+section#assets.parallax-hero.sticky-rounded,
+section#infrastructure.parallax-hero.sticky-rounded,
+section#cases.sticky-rounded {
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    transition: border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease;
 }
 
 /* Увеличиваем z-index для каждой последующей секции для эффекта наложения */
@@ -142,12 +153,36 @@ section#when-contact:nth-of-type(2) {
 
 section#clients {
     z-index: 4;
+    border-bottom: none;
 }
 
 section#assets {
     z-index: 5;
     position: relative;
     overflow: hidden;
+    border-top: none;
+}
+
+section#infrastructure {
+    border-bottom: none;
+}
+
+section#what-we-do {
+    border-bottom: none;
+}
+
+section#when-contact {
+    border-bottom: none;
+    border-top: none;
+}
+
+section#what-we-do {
+    border-top: none;
+}
+
+section#cases {
+    border-top: none;
+    border-bottom: none;
 }
 
 section#assets .container {

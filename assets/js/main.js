@@ -592,9 +592,21 @@ document.querySelectorAll('.button.primary, .button.white').forEach(button => {
 /**
  * Initialize parallax effect for sections with parallax-hero class
  * Creates sticky effect with next section overlaying
+ * Adds rounded corners only when section becomes sticky
  */
 function initParallaxSections() {
-    const parallaxSections = document.querySelectorAll('section.parallax-hero');
+    // Секции от "Кто мы" до "Кейсы", которые должны иметь закругления при прокрутке
+    // Используем querySelectorAll для всех секций с id="when-contact"
+    const sectionsToRound = [
+        'section#what-we-do',
+        'section#when-contact',
+        'section#clients',
+        'section#assets',
+        'section#infrastructure',
+        'section#cases'
+    ];
+
+    const parallaxSections = document.querySelectorAll('section.parallax-hero, section#cases');
     if (!parallaxSections.length) return;
 
     parallaxSections.forEach((section) => {
@@ -608,18 +620,28 @@ function initParallaxSections() {
         }
     });
 
-    // Also handle scroll to ensure sticky works
+    // Handle scroll to add rounded corners when sticky
     let ticking = false;
     function updateParallax() {
-        parallaxSections.forEach((section) => {
-            const rect = section.getBoundingClientRect();
-            const isSticky = rect.top <= 0 && rect.bottom > 0;
+        // Обрабатываем все секции с указанными ID
+        sectionsToRound.forEach(selector => {
+            // Для when-contact используем querySelectorAll, так как может быть несколько секций
+            const sections = selector === 'section#when-contact' 
+                ? document.querySelectorAll(selector)
+                : [document.querySelector(selector)].filter(Boolean);
             
-            if (isSticky) {
-                section.style.position = 'sticky';
-                section.style.top = '0';
-                section.style.zIndex = '10';
-            }
+            sections.forEach(section => {
+                if (!section) return;
+                
+                const rect = section.getBoundingClientRect();
+                const isSticky = rect.top <= 0 && rect.bottom > 0;
+                
+                if (isSticky) {
+                    section.classList.add('sticky-rounded');
+                } else {
+                    section.classList.remove('sticky-rounded');
+                }
+            });
         });
         ticking = false;
     }
@@ -630,6 +652,9 @@ function initParallaxSections() {
             ticking = true;
         }
     }, { passive: true });
+
+    // Initial check
+    updateParallax();
 }
 
 /**
