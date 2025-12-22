@@ -697,9 +697,9 @@ section#team-grid {
     background: var(--bg-dark) !important;
 }
 
-/* Компактные стили для секции команды - 4 карточки в ряд */
-section#team-grid .grid-4 {
-    gap: 16px;
+/* Компактные стили для секции команды - 3 карточки в ряд */
+section#team-grid .grid-3 {
+    gap: 20px;
 }
 
 section#team-grid .person-card {
@@ -721,9 +721,10 @@ section#team-grid .person-role {
 }
 
 section#team-grid .person-desc {
-    font-size: 0.6875rem;
+    font-size: 0.8125rem;
     line-height: 1.5;
     margin-bottom: 10px;
+    color: var(--text-dark-secondary) !important;
 }
 
 section#team-grid .person-email {
@@ -1831,6 +1832,8 @@ footer {
     gap: 24px;
     flex-wrap: wrap;
     padding: 32px 0;
+    margin: 0 auto;
+    max-width: 100%;
 }
 
 .proxy-structure-item {
@@ -1892,18 +1895,27 @@ footer {
     justify-content: center;
     min-width: 180px;
     padding: 20px 32px;
-    background: linear-gradient(135deg, rgba(163, 22, 33, 0.2) 0%, rgba(163, 22, 33, 0.1) 100%);
-    border: 2px solid var(--accent);
-    border-radius: var(--radius-lg);
+    background: transparent;
+    border: none;
     position: relative;
 }
 
 .proxy-structure-center-label {
     font-size: 1.125rem;
     font-weight: 700;
-    color: var(--accent);
     text-align: center;
     letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.proxy-structure-logo-text {
+    color: var(--text-white);
+}
+
+.proxy-structure-logo-accent {
+    color: var(--accent);
 }
 
 .proxy-structure-connector {
