@@ -375,7 +375,7 @@ p {
 
 .header.scrolled {
     padding: 14px 0;
-    background: rgba(13, 13, 15, 0.98);
+    background: rgba(47, 47, 51, 0.98);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -384,6 +384,11 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 24px;
+}
+
+.header-content .nav-main {
+    margin-left: auto;
 }
 
 .logo {
@@ -506,13 +511,17 @@ p {
 }
 
 .mobile-menu .nav-actions {
-    margin-top: auto;
-    flex-direction: column;
+    margin-top: 16px;
+    flex-direction: row;
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 20px;
 }
 
 .mobile-menu .nav-actions .button {
-    width: 100%;
+    width: auto;
+    display: inline-flex;
 }
 
 /* --- Hero Section --- */
@@ -665,13 +674,26 @@ section.parallax-hero {
     will-change: transform;
 }
 
+/* Отключаем sticky позиционирование на мобильных устройствах */
+@media (max-width: 768px) {
+    section.parallax-hero {
+        position: static !important;
+    }
+    
+    .section-hero.parallax-hero {
+        position: static !important;
+    }
+}
+
 /* Специфичные стили для секции "Что мы делаем" */
 section#what-we-do.parallax-hero {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 10;
+    position: relative;
 }
+
 
 /* Специфичные стили для секции "Когда к нам обращаются" */
 section#when-contact.parallax-hero {
@@ -706,8 +728,28 @@ section.parallax-hero.section-surface {
     background: var(--bg-surface);
 }
 
+
+/* Фоновое изображение для секции "Кейсы" */
+/* Фоновое изображение для секции "Кейсы" */
+section#cases {
+    position: static !important;
+}
+
 /* Переопределение фона для секции компетенций на странице компетенций */
 section#competencies-grid {
+    background: var(--bg-dark) !important;
+}
+
+/* Стили для страницы PROXITY - чередование фонов */
+.proxity-first-section {
+    background: var(--bg-dark) !important;
+}
+
+.proxity-alt-section {
+    background: #2F2F33 !important;
+}
+
+.proxity-dark-section {
     background: var(--bg-dark) !important;
 }
 
@@ -795,7 +837,7 @@ section#team-grid .person-placeholder {
 
 /* Переопределение фона футера на странице команды */
 body:has(section#team-grid) footer {
-    background: var(--bg-surface) !important;
+    background: #2F2F33 !important;
 }
 
 /* Переопределение фона для секции контактов на странице контактов */
@@ -805,7 +847,7 @@ section#contact-section {
 
 /* Переопределение фона футера на странице контактов */
 body:has(section#contact-section) footer {
-    background: var(--bg-surface) !important;
+    background: #2F2F33 !important;
 }
 
 /* Следующая секция после parallax-hero должна быть поверх */
@@ -1272,7 +1314,7 @@ footer {
     position: relative;
     z-index: 100;
     padding: 80px 0 40px;
-    background: var(--bg-dark);
+    background: #2F2F33;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     margin-top: 0;
 }
@@ -1678,10 +1720,88 @@ footer {
         padding: 60px 0;
     }
     
-    .grid-2,
-    .grid-3,
+    /* Кнопки CTA в секции PROXITY одинакового размера на мобильных */
+    section.proxity-dark-section .text-center > div[style*="display: flex"] {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    
+    section.proxity-dark-section .text-center > div[style*="display: flex"] .button {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 140px;
+    }
+    
+    /* Отступ перед текстом в proxy-structure на мобильных */
+    section#when-contact .proxy-structure p {
+        margin-top: 24px;
+    }
+    
+    /* Grid-2 по 2 в ряд на мобильных */
+    .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    /* Grid-3 по 2 в ряд на мобильных, кроме секции кейсов */
+    section .grid-3:not(section#cases .grid-3) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    /* Более специфичное правило для секции assets */
+    section#assets .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    /* Блоки команды по 1 в ряд на мобильных */
+    section#team-grid .grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+    }
+    
+    /* Блоки в секции PROXITY по 1 в ряд на мобильных */
+    section.proxity-alt-section .grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+    }
+    
     .grid-4 {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    /* Горизонтальная прокрутка для кейсов на мобильных */
+    section#cases .grid-3 {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+        padding-bottom: 8px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    }
+    
+    section#cases .grid-3::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    section#cases .grid-3::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    section#cases .grid-3::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+    }
+    
+    section#cases .grid-3 > * {
+        flex: 0 0 85%;
+        max-width: 85%;
+        scroll-snap-align: start;
     }
     
     .carousel-slide {
@@ -1728,9 +1848,16 @@ footer {
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 40px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .contact-form {
+        order: 2;
     }
     
     .contact-info {
+        order: 1;
         position: static;
     }
     
@@ -1763,6 +1890,28 @@ footer {
 }
 
 @media (max-width: 480px) {
+    /* Grid-2 по 1 в ряд на узких мобильных */
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Grid-3 по 1 в ряд на узких мобильных */
+    section#assets .grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+    }
+    
+    /* Grid-4 по 1 в ряд на узких мобильных */
+    section#infrastructure .grid-4 {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+    }
+    
+    /* Grid-3 в секции what-we-do по 1 в ряд на узких мобильных */
+    section#what-we-do .grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+    }
     .container {
         padding: 0 16px;
     }

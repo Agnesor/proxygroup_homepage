@@ -606,17 +606,26 @@ function initParallaxSections() {
         'section#cases'
     ];
 
-    const parallaxSections = document.querySelectorAll('section.parallax-hero, section#cases');
+    const parallaxSections = document.querySelectorAll('section.parallax-hero');
     if (!parallaxSections.length) return;
 
-    parallaxSections.forEach((section) => {
-        // Force sticky positioning via inline styles
-        section.style.cssText += 'position: -webkit-sticky !important; position: sticky !important; top: 0 !important; z-index: 10 !important; margin-bottom: 0 !important;';
+    // Проверяем, не мобильное ли устройство
+    const isMobile = window.innerWidth <= 768;
 
-        // Ensure next section overlays
-        const nextSection = section.nextElementSibling;
-        if (nextSection && nextSection.tagName === 'SECTION') {
-            nextSection.style.cssText += 'position: relative !important; z-index: 20 !important; margin-top: 0 !important;';
+    parallaxSections.forEach((section) => {
+        // На мобильных устройствах не применяем sticky позиционирование
+        if (!isMobile) {
+            // Force sticky positioning via inline styles
+            section.style.cssText += 'position: -webkit-sticky !important; position: sticky !important; top: 0 !important; z-index: 10 !important; margin-bottom: 0 !important;';
+
+            // Ensure next section overlays
+            const nextSection = section.nextElementSibling;
+            if (nextSection && nextSection.tagName === 'SECTION') {
+                nextSection.style.cssText += 'position: relative !important; z-index: 20 !important; margin-top: 0 !important;';
+            }
+        } else {
+            // На мобильных устройствах принудительно устанавливаем static
+            section.style.cssText += 'position: static !important;';
         }
     });
 
@@ -651,6 +660,22 @@ function initParallaxSections() {
             window.requestAnimationFrame(updateParallax);
             ticking = true;
         }
+    }, { passive: true });
+
+    // Обработчик изменения размера окна для мобильных устройств
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const isMobileNow = window.innerWidth <= 768;
+            parallaxSections.forEach((section) => {
+                if (isMobileNow) {
+                    section.style.cssText += 'position: static !important;';
+                } else {
+                    section.style.cssText += 'position: -webkit-sticky !important; position: sticky !important; top: 0 !important; z-index: 10 !important; margin-bottom: 0 !important;';
+                }
+            });
+        }, 150);
     }, { passive: true });
 
     // Initial check
