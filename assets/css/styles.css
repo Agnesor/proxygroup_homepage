@@ -55,7 +55,7 @@ html {
 }
 
 body {
-    background-color: var(--bg-dark);
+    background-color: #000000;
     color: var(--text-light);
     font-family: var(--font-main);
     line-height: 1.6;
@@ -91,7 +91,7 @@ img {
 
 section {
     padding: 100px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: none;
 }
 
 section:last-of-type {
@@ -232,6 +232,19 @@ body > section:not(:first-child):not(.parallax-hero):nth-child(odd) {
 /* Hero секция имеет свой фон (изображение или темный) */
 .section-hero {
     background-color: var(--bg-dark);
+}
+
+/* Прозрачный фон для всех секций на странице компетенций, кроме competency-card */
+body:has(.competency-card) .section-hero {
+    background-color: transparent;
+}
+
+body:has(.competency-card) section:not(.competency-card) {
+    background-color: transparent !important;
+}
+
+body:has(.competency-card) section.section-surface {
+    background-color: transparent !important;
 }
 
 /* Переопределение для секций с классом section-surface - они должны быть графитовыми */
@@ -532,7 +545,7 @@ p {
     align-items: center;
     padding-top: 160px;
     padding-bottom: 100px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: none;
     background-color: var(--bg-dark);
     background-size: cover;
     background-position: center;
@@ -792,9 +805,42 @@ section#approach.parallax-hero {
     background: var(--bg-surface) !important;
 }
 
+/* Графитовый фон для карточек в секции approach */
+section#approach .card.card-light {
+    background: var(--bg-surface) !important;
+}
+
+/* Белый текст для заголовков и описаний в карточках секции approach */
+section#approach .card.card-light .card-title,
+section#approach .card.card-light h3,
+section#approach .card.card-light h4,
+section#approach .card.card-light p {
+    color: var(--text-white) !important;
+}
+
+/* Белая заливка для тегов в секции approach */
+section#approach .tag {
+    background: #FFFFFF !important;
+    color: var(--text-dark) !important;
+}
+
 /* Переопределение фона для секции команды на странице команды */
 section#team-grid {
     background: var(--bg-dark) !important;
+}
+
+/* Стили для карточки компетенции */
+section.competency-card {
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    margin: 24px;
+    padding: 40px 0;
+    border-top: none;
+    border-bottom: none;
+}
+
+section.competency-card .container {
+    padding: 0 40px;
 }
 
 /* Компактные стили для секции команды - 3 карточки в ряд */
