@@ -146,6 +146,29 @@ section#clients {
 
 section#assets {
     z-index: 5;
+    position: relative;
+    overflow: hidden;
+}
+
+section#assets .container {
+    position: relative;
+    z-index: 1;
+}
+
+.assets-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(120px, 25vw, 400px);
+    font-weight: 900;
+    color: rgba(30, 30, 35, 0.08);
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    letter-spacing: 0.02em;
 }
 
 section#infrastructure {
