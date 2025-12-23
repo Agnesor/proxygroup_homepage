@@ -323,6 +323,8 @@ body > section:not(:first-child):not(.parallax-hero):nth-child(odd) {
 /* Прозрачный фон для всех секций на странице компетенций, кроме competency-card */
 body:has(.competency-card) .section-hero {
     background-color: transparent;
+    padding-top: 220px !important;
+    padding-bottom: 80px !important;
 }
 
 body:has(.competency-card) section:not(.competency-card) {
