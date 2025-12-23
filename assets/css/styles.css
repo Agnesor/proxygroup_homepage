@@ -1679,13 +1679,31 @@ footer {
 }
 
 /* --- Responsive --- */
+/* На больших планшетах (768px-1024px) - текст и картинка рядом */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .two-col {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
 @media (max-width: 1024px) {
     .grid-4 {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .two-col {
-        grid-template-columns: 1fr;
+    /* На больших планшетах (769px-1024px) - две колонки */
+    @media (min-width: 769px) {
+        .two-col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    /* На узких экранах (до 768px) - одна колонка */
+    @media (max-width: 768px) {
+        .two-col {
+            grid-template-columns: 1fr;
+        }
     }
     
     .carousel-slide {
@@ -1764,6 +1782,22 @@ footer {
 @media (max-width: 768px) {
     section {
         padding: 60px 0;
+    }
+    
+    /* На узких мобильных - сначала текст, потом картинка */
+    .two-col {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    /* Обеспечиваем порядок: сначала текст (div с h2), потом картинка (div с img) */
+    .two-col > div:has(h2),
+    .two-col > div:has(.section-title) {
+        order: 1;
+    }
+    
+    .two-col > div:has(img) {
+        order: 2;
     }
     
     /* Кнопки CTA в секции PROXITY одинакового размера на мобильных */
