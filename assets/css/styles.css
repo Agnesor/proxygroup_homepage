@@ -106,13 +106,30 @@ section#what-we-do.competency-card {
 
 /* Графитовый фон для секции "Для каких клиентов мы работаем" */
 body:has(section#when-contact:not(.parallax-hero)) section#clients.competency-card {
-    background: var(--bg-surface) !important;
-    background-color: var(--bg-surface) !important;
+    background: var(--accent) !important;
+    background-color: var(--accent) !important;
 }
 
 section#clients.competency-card {
-    background: var(--bg-surface) !important;
-    background-color: var(--bg-surface) !important;
+    background: var(--accent) !important;
+    background-color: var(--accent) !important;
+}
+
+/* Белый текст для описания в секции #clients */
+section#clients.competency-card p {
+    color: var(--text-white) !important;
+}
+
+section#clients.competency-card h2.section-title {
+    color: var(--text-white) !important;
+}
+
+/* Белые точки перед заголовком в секции #clients */
+section#clients.competency-card h2.section-title::before {
+    background-image: 
+        radial-gradient(circle, transparent 1.5px, var(--text-white) 1.5px, var(--text-white) 3.5px, transparent 3.5px),
+        radial-gradient(circle, transparent 1.5px, var(--text-white) 1.5px, var(--text-white) 3.5px, transparent 3.5px),
+        radial-gradient(circle, transparent 1.5px, var(--text-white) 1.5px, var(--text-white) 3.5px, transparent 3.5px);
 }
 
 /* Графитовый фон для секции "Технологии PROXITY" */
@@ -537,6 +554,16 @@ p {
     font-weight: 700;
 }
 
+.logo-quotes {
+    color: var(--accent);
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    transform: translateY(-5px);
+}
+
 .logo:hover .logo-text {
     opacity: 0.9;
 }
@@ -642,17 +669,19 @@ p {
     border-radius: var(--radius-md);
     text-decoration: none;
     position: relative;
+    display: inline-block;
+}
+
+.mobile-menu .nav-link.active {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+    text-decoration-skip-ink: none;
 }
 
 .mobile-menu .nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: 12px;
-    left: 20px;
-    right: 20px;
-    height: 2px;
-    background-color: var(--accent);
-    border-radius: 1px;
+    display: none;
 }
 
 .mobile-menu .nav-actions {
@@ -890,6 +919,7 @@ p {
     min-height: auto;
     margin-bottom: 0;
 }
+
 
 .section-hero.parallax-hero + .section-surface {
     position: relative;
@@ -1581,10 +1611,22 @@ section#cases .cases-slider > *:hover {
     position: absolute;
     left: 0;
     top: 32px;
-    width: 3px;
-    height: 40px;
-    background: var(--accent);
-    border-radius: 2px;
+    color: var(--accent);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateY(-3px);
+}
+
+.case-accent::before {
+    content: '‹';
+}
+
+.case-accent::after {
+    content: '›';
+    margin-left: 6px;
 }
 
 /* Номера карточек */
@@ -2533,6 +2575,13 @@ footer {
         grid-template-columns: 1fr !important;
         gap: 12px;
     }
+    
+    /* Grid-3 в секции competency-card (Безопасность) по 1 в ряд на узких мобильных */
+    section.competency-card .grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+    }
+    
     .container {
         padding: 0 16px;
     }
@@ -2661,6 +2710,17 @@ footer {
     flex-wrap: wrap;
     padding: 32px 0;
     margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+}
+
+/* Центрирование только блока proxy-structure в секции #when-contact */
+section#when-contact .proxy-structure {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     max-width: 100%;
 }
 

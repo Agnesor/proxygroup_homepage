@@ -614,6 +614,13 @@ function initParallaxSections() {
     const isMobile = window.innerWidth <= 768;
 
     parallaxSections.forEach((section) => {
+        // Пропускаем hero-секцию на странице команды (содержит текст "Команда")
+        const heroTitle = section.querySelector('h1.hero-title');
+        if (heroTitle && heroTitle.textContent.includes('Команда')) {
+            section.style.cssText += 'position: static !important;';
+            return;
+        }
+        
         // На мобильных устройствах не применяем sticky позиционирование
         if (!isMobile) {
             // Force sticky positioning via inline styles
@@ -670,6 +677,13 @@ function initParallaxSections() {
         resizeTimer = setTimeout(() => {
             const isMobileNow = window.innerWidth <= 768;
             parallaxSections.forEach((section) => {
+                // Пропускаем hero-секцию на странице команды
+                const heroTitle = section.querySelector('h1.hero-title');
+                if (heroTitle && heroTitle.textContent.includes('Команда')) {
+                    section.style.cssText += 'position: static !important;';
+                    return;
+                }
+                
                 if (isMobileNow) {
                     section.style.cssText += 'position: static !important;';
                 } else {
