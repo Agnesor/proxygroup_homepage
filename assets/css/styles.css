@@ -272,15 +272,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-size: 44px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.15;
 }
 
-/* Дополнительное уменьшение для hero-секций */
+/* Дополнительное правило для hero-секций */
 .section-hero h1.hero-title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.2;
+    font-size: 44px;
+    line-height: 1.15;
 }
 
 h2 {
@@ -869,6 +869,32 @@ section.competency-card {
     border-bottom: none;
 }
 
+/* Акцентный фон для секции "Запросы инвесторов" */
+section.competency-card-accent {
+    background: var(--accent) !important;
+}
+
+/* Белый текст для акцентной карточки */
+section.competency-card-accent .section-title,
+section.competency-card-accent p,
+section.competency-card-accent h2,
+section.competency-card-accent h3 {
+    color: var(--text-white) !important;
+}
+
+/* Черные/графитовые точки для заголовка в акцентной карточке */
+section.competency-card-accent .section-title::before {
+    background-image: 
+        radial-gradient(circle, transparent 1.5px, var(--bg-dark) 1.5px, var(--bg-dark) 3.5px, transparent 3.5px),
+        radial-gradient(circle, transparent 1.5px, var(--bg-dark) 1.5px, var(--bg-dark) 3.5px, transparent 3.5px),
+        radial-gradient(circle, transparent 1.5px, var(--bg-dark) 1.5px, var(--bg-dark) 3.5px, transparent 3.5px);
+}
+
+/* Скрыть описание в hero-секции на странице контактов */
+body:has(section#contact-section) .hero-desc {
+    display: none;
+}
+
 /* Фиксированная ширина фона для карточек на странице PROXITY на больших экранах */
 /* Ширина совпадает с шириной контента секции "Что дает платформа" (контейнер с padding) */
 @media (min-width: 1025px) {
@@ -973,16 +999,17 @@ section.parallax-hero + section:not(.section-surface) {
 
 .hero-title {
     margin-bottom: 32px;
-    line-height: 1.2;
-    font-size: 2.5rem;
+    line-height: 1.15;
+    font-size: 44px;
 }
 
 .hero-desc {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: var(--text-light);
     margin-bottom: 28px;
     max-width: 720px;
     opacity: 0.9;
+    line-height: 1.4;
 }
 
 .hero-buttons {
@@ -1983,11 +2010,15 @@ footer {
     
     .contact-form {
         order: 2;
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
     .contact-info {
         order: 1;
         position: static;
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
     /* Отключение параллакса на мобильных устройствах */
