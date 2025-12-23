@@ -853,6 +853,23 @@ section.competency-card {
     border-bottom: none;
 }
 
+/* Фиксированная ширина фона для карточек на странице PROXITY на больших экранах */
+/* Ширина совпадает с шириной контента секции "Что дает платформа" (контейнер с padding) */
+@media (min-width: 1025px) {
+    body:has(section.proxity-dark-section) section.competency-card {
+        max-width: var(--container-max);
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Внутренний контейнер с padding, чтобы контент начинался там же, где карточки в секции "Что дает платформа" */
+    body:has(section.proxity-dark-section) section.competency-card .container {
+        padding: 0 24px;
+    }
+}
+
 section.competency-card .container {
     padding: 0 40px;
 }
