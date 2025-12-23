@@ -766,6 +766,20 @@ section#competencies-grid {
     background: var(--bg-dark) !important;
 }
 
+/* Графитовый фон и белый текст для карточек в секции "Что дает платформа" */
+section.proxity-dark-section .card.card-light {
+    background: var(--bg-surface) !important;
+}
+
+section.proxity-dark-section .card.card-light .card-title,
+section.proxity-dark-section .card.card-light h3,
+section.proxity-dark-section .card.card-light h4,
+section.proxity-dark-section .card.card-light p,
+section.proxity-dark-section .card.card-light li,
+section.proxity-dark-section .card.card-light .checklist li {
+    color: var(--text-white) !important;
+}
+
 /* Компактные стили для секции компетенций */
 section#competencies-grid .grid-2 {
     gap: 16px;
@@ -831,7 +845,7 @@ section#team-grid {
 
 /* Стили для карточки компетенции */
 section.competency-card {
-    background: var(--bg-surface);
+    background: var(--bg-surface) !important;
     border-radius: var(--radius-lg);
     margin: 24px;
     padding: 40px 0;
