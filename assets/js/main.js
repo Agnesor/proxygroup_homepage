@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initParallaxSections();
     initHeroSlider();
     initModal();
+    initCasesSlider();
 });
 
 /**
@@ -693,9 +694,40 @@ function initHeroSlider() {
     const slides = heroSection.querySelectorAll('.hero-slider-slide');
     if (slides.length < 2) return;
 
+    const indicatorsContainer = heroSection.querySelector('.hero-slider-indicators');
+    const indicators = [];
+
+    // Создаем индикаторы
+    slides.forEach((_, index) => {
+        const indicator = document.createElement('button');
+        indicator.className = 'hero-slider-indicator' + (index === 0 ? ' active' : '');
+        indicator.setAttribute('aria-label', `Перейти к слайду ${index + 1}`);
+        indicator.addEventListener('click', () => {
+            goToSlide(index);
+        });
+        indicatorsContainer.appendChild(indicator);
+        indicators.push(indicator);
+    });
+
     let currentSlide = 0;
     const slideInterval = 4000; // 4 seconds
-    const fadeDuration = 1500; // 1.5 seconds for fade transition
+
+    function updateIndicators() {
+        indicators.forEach((indicator, index) => {
+            if (index === currentSlide) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+
+    function goToSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = index;
+        slides[currentSlide].classList.add('active');
+        updateIndicators();
+    }
 
     function nextSlide() {
         // Remove active class from current slide
@@ -706,6 +738,9 @@ function initHeroSlider() {
         
         // Add active class to new slide
         slides[currentSlide].classList.add('active');
+        
+        // Update indicators
+        updateIndicators();
     }
 
     // Start the slider - работает непрерывно, независимо от наведения мыши
@@ -714,6 +749,7 @@ function initHeroSlider() {
     // Ensure first slide is visible on load
     if (slides.length > 0) {
         slides[0].classList.add('active');
+        updateIndicators();
     }
 }
 
@@ -764,4 +800,129 @@ function initModal() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
+}
+
+/**
+ * Initialize cases slider with navigation arrows and dots
+ */
+function initCasesSlider() {
+    const slider = document.querySelector('section#cases .cases-slider');
+    if (!slider) return;
+
+    const prevBtn = document.querySelector('.cases-slider-prev');
+    const nextBtn = document.querySelector('.cases-slider-next');
+    const dotsContainer = document.querySelector('.cases-slider-dots');
+    const slides = slider.querySelectorAll('.case-card');
+    
+    if (!slides.length) return;
+
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = 'cases-slider-dot' + (index === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Перейти к кейсу ${index + 1}`);
+        dot.addEventListener('click', () => scrollToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = dotsContainer.querySelectorAll('.cases-slider-dot');
+    const itemsPerView = window.innerWidth <= 768 ? 1 : 3;
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+
+    function updateButtons() {
+        if (prevBtn) prevBtn.disabled = currentIndex === 0;
+        if (nextBtn) nextBtn.disabled = currentIndex >= totalSlides - itemsPerView;
+    }
+
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            const slideIndex = Math.floor(currentIndex / itemsPerView);
+            dot.classList.toggle('active', Math.floor(index / itemsPerView) === slideIndex);
+        });
+    }
+
+    function scrollToSlide(index) {
+        const slide = slides[index];
+        if (!slide) return;
+        
+        const slideWidth = slide.offsetWidth + 20; // включая gap
+        slider.scrollTo({
+            left: index * slideWidth,
+            behavior: 'smooth'
+        });
+        
+        currentIndex = index;
+        updateButtons();
+        updateDots();
+    }
+
+    function scrollNext() {
+        if (currentIndex < totalSlides - itemsPerView) {
+            currentIndex += itemsPerView;
+            scrollToSlide(currentIndex);
+        }
+    }
+
+    function scrollPrev() {
+        if (currentIndex > 0) {
+            currentIndex = Math.max(0, currentIndex - itemsPerView);
+            scrollToSlide(currentIndex);
+        }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', scrollPrev);
+    if (nextBtn) nextBtn.addEventListener('click', scrollNext);
+
+    // Update on scroll
+    slider.addEventListener('scroll', () => {
+        const scrollLeft = slider.scrollLeft;
+        const slideWidth = slides[0]?.offsetWidth + 20;
+        currentIndex = Math.round(scrollLeft / slideWidth);
+        updateButtons();
+        updateDots();
+    }, { passive: true });
+
+    // Update on resize
+    window.addEventListener('resize', () => {
+        const itemsPerViewNew = window.innerWidth <= 768 ? 1 : 3;
+        updateButtons();
+    }, { passive: true });
+
+    // Автоматическая прокрутка каждые 4 секунды на 1 кейс
+    let autoScrollInterval;
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(() => {
+            if (currentIndex < totalSlides - 1) {
+                currentIndex += 1;
+                scrollToSlide(currentIndex);
+            } else {
+                // Если достигли конца, возвращаемся к началу
+                currentIndex = 0;
+                scrollToSlide(0);
+            }
+        }, 4000);
+    }
+
+    function stopAutoScroll() {
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+        }
+    }
+
+    // Останавливаем автопрокрутку при наведении мыши
+    slider.addEventListener('mouseenter', stopAutoScroll);
+    slider.addEventListener('mouseleave', startAutoScroll);
+    
+    // Останавливаем автопрокрутку при взаимодействии пользователя
+    if (prevBtn) prevBtn.addEventListener('mouseenter', stopAutoScroll);
+    if (nextBtn) nextBtn.addEventListener('mouseenter', stopAutoScroll);
+    slider.addEventListener('touchstart', stopAutoScroll);
+    slider.addEventListener('touchend', () => {
+        setTimeout(startAutoScroll, 4000);
+    });
+
+    updateButtons();
+    updateDots();
+    startAutoScroll();
 }

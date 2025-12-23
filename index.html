@@ -60,10 +60,13 @@
 
     <!-- Hero -->
     <section class="section-hero hero-slider">
-        <div class="hero-slider-slides">
-            <div class="hero-slider-slide active" style="background-image: url('assets/images/hero-bg.jpg');"></div>
-            <div class="hero-slider-slide" style="background-image: url('assets/images/hero-bg2.jpg');"></div>
-            <div class="hero-slider-slide" style="background-image: url('assets/images/hero-bg3.jpg');"></div>
+        <div class="hero-slider-wrapper">
+            <div class="hero-slider-slides">
+                <div class="hero-slider-slide" style="background-image: url('assets/images/hero-bg.jpg');"></div>
+                <div class="hero-slider-slide" style="background-image: url('assets/images/hero-bg2.jpg');"></div>
+                <div class="hero-slider-slide" style="background-image: url('assets/images/hero-bg3.jpg');"></div>
+            </div>
+            <div class="hero-slider-indicators"></div>
         </div>
         <div class="container">
             <div class="hero-grid fade-in-up">
@@ -80,9 +83,9 @@
     </section>
 
     <!-- Когда к нам обращаются -->
-    <section id="when-contact" class="parallax-hero" style="padding-top: 160px;">
+    <section id="when-contact" class="competency-card">
         <div class="container">
-            <div class="fade-in-up" style="max-width: 1000px; margin-top: -56px;">
+            <div class="fade-in-up" style="max-width: 1000px;">
                 <h2 class="section-title fade-in-up" style="margin-bottom: 24px;">Кто мы</h2>
                 <p>
                     PROXY — консалтинговая компания, работающая со сложными сделками, где стандартные решения не работают.
@@ -130,7 +133,7 @@
     </section>
 
     <!-- Что мы делаем -->
-    <section class="section-surface parallax-hero" id="what-we-do">
+    <section class="section-surface competency-card" id="what-we-do">
         <div class="container">
             <h2 class="section-title fade-in-up">Что мы делаем</h2>
             <p class="fade-in-up mb-4" style="max-width: 720px;">
@@ -151,7 +154,7 @@
     </section>
 
     <!-- Когда к нам обращаются -->
-    <section id="when-contact" class="parallax-hero">
+    <section id="when-contact">
         <div class="container">
             <h2 class="section-title fade-in-up">Когда к нам обращаются</h2>
             <div class="two-col fade-in-up" style="align-items: start;">
@@ -170,7 +173,7 @@
     </section>
 
     <!-- Для каких клиентов мы работаем -->
-    <section class="section-surface parallax-hero" id="clients">
+    <section class="section-surface competency-card" id="clients">
         <div class="container">
             <h2 class="section-title fade-in-up">Для каких клиентов мы работаем</h2>
             <div class="grid-2 fade-in-up">
@@ -199,7 +202,7 @@
     </section>
 
     <!-- С какими активами мы работаем -->
-    <section id="assets" class="parallax-hero">
+    <section id="assets">
         <div class="assets-bg-text">PROXY</div>
         <div class="container">
             <h2 class="section-title fade-in-up">С какими активами мы работаем</h2>
@@ -223,7 +226,7 @@
     </section>
 
     <!-- Инфраструктура и PROXITY -->
-    <section class="section-surface parallax-hero" id="infrastructure">
+    <section class="section-surface competency-card" id="infrastructure">
         <div class="container">
             <h2 class="section-title fade-in-up">Технологии PROXITY</h2>
             <p class="fade-in-up mb-4" style="max-width: 800px;">
@@ -261,7 +264,13 @@
     <section id="cases">
         <div class="container">
             <h2 class="section-title fade-in-up" style="text-align: left;">Кейсы</h2>
-            <div class="grid-3 stagger-children">
+            <div class="cases-slider-wrapper">
+                <button class="cases-slider-nav cases-slider-prev" aria-label="Предыдущий кейс">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <div class="grid-3 stagger-children cases-slider">
                 <div class="card card-light case-card">
                     <div class="case-accent"></div>
                     <div class="card-title">Продажа производственного комплекса</div>
@@ -292,7 +301,14 @@
                     <div class="card-title">Продажа особняка ОКН</div>
                     <p class="mb-0">Комплексная работа по продаже знакового объекта недвижимости. Проведена оценка исторической и инвестиционной ценности, анализ ограничений использования, поиск подходящего покупателя и сопровождение сделки до регистрации.</p>
                 </div>
+                </div>
+                <button class="cases-slider-nav cases-slider-next" aria-label="Следующий кейс">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
             </div>
+            <div class="cases-slider-dots"></div>
             <div class="text-center fade-in-up" style="margin-top: 48px;">
                 <a href="#" class="button primary" data-modal-open="contact-modal">Обсудить задачу и формат работы</a>
             </div>

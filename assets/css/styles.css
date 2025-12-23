@@ -60,6 +60,91 @@ body {
     font-family: 'ComonsPro', sans-serif;
     line-height: 1.6;
     font-size: 16px;
+}
+
+/* Черный фон для главной страницы */
+body:has(section#when-contact:not(.parallax-hero)) {
+    background-color: #000000;
+}
+
+/* Прозрачный фон для hero-секции на главной странице */
+body:has(section#when-contact:not(.parallax-hero)) .section-hero {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Прозрачный фон для всех секций на главной странице, кроме футера и competency-card */
+body:has(section#when-contact:not(.parallax-hero)) section:not(footer):not(.competency-card) {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* Графитовый фон для секции с классом competency-card на главной странице, исключая "Что мы делаем", "Для каких клиентов" и "Технологии PROXITY" */
+body:has(section#when-contact:not(.parallax-hero)) section.competency-card:not(#what-we-do):not(#clients):not(#infrastructure) {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Прозрачный фон для секции "Кто мы" */
+section#when-contact.competency-card {
+    background: transparent !important;
+    background-color: transparent !important;
+    padding-top: 24px;
+    padding-bottom: 40px;
+}
+
+/* Графитовый фон для секции "Что мы делаем" - переопределяет общее правило */
+body:has(section#when-contact:not(.parallax-hero)) section#what-we-do.competency-card {
+    background: var(--bg-surface) !important;
+    background-color: var(--bg-surface) !important;
+}
+
+section#what-we-do.competency-card {
+    background: var(--bg-surface) !important;
+    background-color: var(--bg-surface) !important;
+}
+
+/* Графитовый фон для секции "Для каких клиентов мы работаем" */
+body:has(section#when-contact:not(.parallax-hero)) section#clients.competency-card {
+    background: var(--bg-surface) !important;
+    background-color: var(--bg-surface) !important;
+}
+
+section#clients.competency-card {
+    background: var(--bg-surface) !important;
+    background-color: var(--bg-surface) !important;
+}
+
+/* Графитовый фон для секции "Технологии PROXITY" */
+body:has(section#when-contact:not(.parallax-hero)) section#infrastructure.competency-card {
+    background: var(--bg-surface) !important;
+    background-color: var(--bg-surface) !important;
+}
+
+section#infrastructure.competency-card {
+    background: var(--bg-surface) !important;
+    background-color: var(--bg-surface) !important;
+}
+
+/* Переопределяем чередование фонов для главной страницы, исключая competency-card */
+body:has(section#when-contact:not(.parallax-hero)) > section:not(:first-child):not(.parallax-hero):not(.competency-card):nth-child(even),
+body:has(section#when-contact:not(.parallax-hero)) > section:not(:first-child):not(.parallax-hero):not(.competency-card):nth-child(odd) {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Переопределяем section-surface для главной страницы, исключая competency-card */
+body:has(section#when-contact:not(.parallax-hero)) .section-surface:not(.parallax-hero):not(.competency-card),
+body:has(section#when-contact:not(.parallax-hero)) > section.section-surface:not(:first-child):not(.parallax-hero):not(.competency-card):nth-child(odd) {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Графитовый фон для section-surface с competency-card "Что мы делаем" */
+body:has(section#when-contact:not(.parallax-hero)) section.section-surface.competency-card#what-we-do {
+    background: var(--bg-surface) !important;
+    background-color: var(--bg-surface) !important;
+}
     min-height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -183,6 +268,7 @@ section#what-we-do {
 section#cases {
     border-top: none;
     border-bottom: none;
+    overflow: visible;
 }
 
 section#assets .container {
@@ -253,12 +339,13 @@ body:has(section.proxity-dark-section) .section-hero[style*="background-image"]:
 }
 
 /* Переопределение для секций с классом section-surface - они должны быть графитовыми */
-.section-surface:not(.parallax-hero) {
+/* Исключаем главную страницу, где все секции прозрачные */
+body:not(:has(section#when-contact:not(.parallax-hero))) .section-surface:not(.parallax-hero) {
     background: var(--bg-surface);
 }
 
 /* Но если section-surface нечетная по счету (после hero), делаем черной для чередования */
-body > section.section-surface:not(:first-child):not(.parallax-hero):nth-child(odd) {
+body:not(:has(section#when-contact:not(.parallax-hero))) > section.section-surface:not(:first-child):not(.parallax-hero):nth-child(odd) {
     background: var(--bg-dark);
 }
 
@@ -468,6 +555,8 @@ p {
     transition: var(--transition);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-decoration: none;
+    position: relative;
 }
 
 /* Белый цвет для навигационных ссылок до скролла */
@@ -477,10 +566,22 @@ p {
 
 .nav-link:hover {
     color: var(--text-white);
+    text-decoration: none;
 }
 
 .nav-link.active {
     color: var(--text-white);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 18px;
+    right: 18px;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 1px;
 }
 
 .nav-actions {
@@ -537,6 +638,19 @@ p {
     font-size: 1.125rem;
     padding: 16px 20px;
     border-radius: var(--radius-md);
+    text-decoration: none;
+    position: relative;
+}
+
+.mobile-menu .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 12px;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 1px;
 }
 
 .mobile-menu .nav-actions {
@@ -621,6 +735,63 @@ p {
 /* Hero Slider */
 .hero-slider {
     position: relative;
+    padding-top: calc(var(--header-height) + 24px);
+    padding-bottom: 100px;
+}
+
+/* Обертка для слайдера с отступами и скругленными краями */
+.hero-slider-wrapper {
+    position: absolute;
+    top: calc(var(--header-height) + 24px);
+    left: 24px;
+    right: 24px;
+    bottom: 100px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    z-index: 0;
+}
+
+@media (max-width: 768px) {
+    .hero-slider {
+        padding-top: calc(var(--header-height) + 16px);
+        padding-bottom: 60px;
+    }
+    
+    .hero-slider-wrapper {
+        top: calc(var(--header-height) + 16px);
+        left: 16px;
+        right: 16px;
+        bottom: 60px;
+        border-radius: var(--radius-md);
+    }
+    
+    .hero-slider-indicators {
+        bottom: 16px;
+        gap: 8px;
+    }
+    
+    .hero-slider .hero-content {
+        padding: 0;
+    }
+    
+    .hero-slider .hero-title {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        margin-bottom: 20px;
+    }
+    
+    .hero-slider .hero-desc {
+        font-size: 1rem;
+        margin-bottom: 24px;
+        max-width: 100%;
+    }
+    
+    .hero-slider .hero-buttons {
+        margin-top: 24px;
+    }
+    
+    .hero-slider .container {
+        padding: 0 24px;
+    }
 }
 
 .hero-slider-slides {
@@ -651,24 +822,56 @@ p {
     z-index: 1;
 }
 
-/* Затемнение для слайдов */
+/* Равномерное затемнение для слайдов без градиента к низу */
 .hero-slider-slide::after {
     content: '';
     position: absolute;
-    top: -1px;
+    top: 0;
     left: 0;
     right: 0;
-    bottom: -3px;
+    bottom: 0;
     width: 100%;
-    height: calc(100% + 4px);
-    min-height: calc(100% + 4px);
-    background: linear-gradient(to bottom, 
-        rgba(13, 13, 15, 0.6) 0%,
-        rgba(13, 13, 15, 0.75) 50%,
-        rgba(13, 13, 15, 0.95) 85%,
-        rgba(13, 13, 15, 1) 100%);
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
     z-index: 2;
     pointer-events: none;
+}
+
+/* Индикаторы слайдера */
+.hero-slider-indicators {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 20;
+}
+
+.hero-slider-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+    outline: none;
+}
+
+.hero-slider-indicator:hover {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.2);
+}
+
+.hero-slider-indicator.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    width: 32px;
+    height: 6px;
+    border-radius: 3px;
 }
 
 /* Убеждаемся, что контент поверх слайдов */
@@ -701,6 +904,12 @@ section.parallax-hero {
     z-index: 10;
     margin-bottom: 0;
     will-change: transform;
+}
+
+/* Отключение эффектов прикрепления и параллакса для секций на главной странице */
+body:has(section#when-contact:not(.parallax-hero)) section {
+    position: static !important;
+    z-index: auto !important;
 }
 
 /* Отключаем sticky позиционирование на мобильных устройствах */
@@ -869,6 +1078,39 @@ section.competency-card {
     border-bottom: none;
 }
 
+/* Дополнительный верхний отступ для первой competency-card на главной странице */
+body:has(section#when-contact.competency-card) section.competency-card:first-of-type {
+    margin-top: 120px;
+}
+
+/* Единый верхний отступ для всех competency-card секций на главной странице */
+section#what-we-do.competency-card,
+section#clients.competency-card,
+section#infrastructure.competency-card {
+    margin-top: 8px;
+    margin-bottom: 24px;
+    padding-top: 48px;
+    padding-bottom: 40px;
+}
+
+/* Единый верхний отступ для секции "Кто мы" */
+section#when-contact.competency-card {
+    padding-top: 48px;
+    padding-bottom: 40px;
+}
+
+/* Гармоничные отступы для остальных секций на главной странице */
+body:has(section#when-contact:not(.parallax-hero)) section:not(.section-hero):not(.competency-card):not(footer) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/* Уменьшенные отступы для секции "Когда к нам обращаются" */
+body:has(section#when-contact:not(.parallax-hero)) section#when-contact:not(.competency-card) {
+    padding-top: 48px;
+    padding-bottom: 60px;
+}
+
 /* Акцентный фон для секции "Запросы инвесторов" */
 section.competency-card-accent {
     background: var(--accent) !important;
@@ -997,6 +1239,20 @@ section.parallax-hero + section:not(.section-surface) {
     text-align: left;
 }
 
+/* Отступы для контента в hero-slider - такие же как в competency-card */
+.hero-slider .container {
+    padding: 0 40px;
+}
+
+.hero-slider .hero-grid {
+    margin-top: 0;
+    padding: 0;
+}
+
+.hero-slider .hero-content {
+    padding: 0;
+}
+
 .hero-title {
     margin-bottom: 32px;
     line-height: 1.15;
@@ -1060,6 +1316,176 @@ section.parallax-hero + section:not(.section-surface) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+}
+
+/* Обертка для слайдера кейсов */
+.cases-slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    overflow: visible;
+}
+
+/* Горизонтальная прокрутка для кейсов на всех устройствах */
+section#cases .cases-slider {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+    flex: 1;
+    scroll-behavior: smooth;
+}
+
+section#cases .cases-slider::-webkit-scrollbar {
+    height: 8px;
+}
+
+section#cases .cases-slider::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+section#cases .cases-slider::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+section#cases .cases-slider::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+section#cases .cases-slider > * {
+    flex: 0 0 calc(33.333% - 14px);
+    max-width: calc(33.333% - 14px);
+    scroll-snap-align: start;
+    position: relative;
+}
+
+section#cases .cases-slider > *:hover {
+    z-index: 20;
+}
+
+/* Кнопки навигации слайдера */
+.cases-slider-nav {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 2;
+}
+
+.cases-slider-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+.cases-slider-nav:active {
+    transform: scale(0.95);
+}
+
+.cases-slider-nav svg {
+    width: 20px;
+    height: 20px;
+}
+
+.cases-slider-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Индикаторы точек */
+.cases-slider-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+    padding: 8px 0;
+}
+
+.cases-slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    padding: 0;
+    outline: none;
+}
+
+.cases-slider-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cases-slider-dot:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.2);
+}
+
+.cases-slider-dot:hover::before {
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+.cases-slider-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    width: 32px;
+    height: 6px;
+    border-radius: 3px;
+    transform: scale(1);
+}
+
+.cases-slider-dot.active::before {
+    display: none;
+}
+
+.cases-slider-dot.active:hover {
+    transform: scale(1.05);
+    background: var(--accent-light);
+    border-color: var(--accent-light);
+}
+
+/* На мобильных устройствах кейсы занимают больше места */
+@media (max-width: 768px) {
+    section#cases .cases-slider > * {
+        flex: 0 0 85%;
+        max-width: 85%;
+    }
+    
+    .cases-slider-nav {
+        display: none;
+    }
 }
 
 .grid-4 {
@@ -1128,6 +1554,8 @@ section.parallax-hero + section:not(.section-surface) {
 .card.card-light:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+    position: relative;
 }
 
 .card.card-light .card-title,
@@ -1487,6 +1915,11 @@ footer {
 
 .footer-logo {
     display: inline-block;
+    text-decoration: none !important;
+}
+
+.footer-logo:hover {
+    text-decoration: none !important;
 }
 
 .footer-logo .logo-img {
@@ -1504,14 +1937,21 @@ footer {
 .footer-logo .logo-text {
     font-size: 1.25rem;
     opacity: 0.8;
+    text-decoration: none !important;
 }
 
 .footer-logo .logo-text-accent {
     font-size: 1.25rem;
+    text-decoration: none !important;
 }
 
 .footer-logo:hover .logo-text {
     opacity: 1;
+    text-decoration: none !important;
+}
+
+.footer-logo:hover .logo-text-accent {
+    text-decoration: none !important;
 }
 
 .footer-links {
@@ -1524,10 +1964,29 @@ footer {
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-decoration: none;
+    position: relative;
+    transition: var(--transition);
 }
 
 .footer-links a:hover {
     color: var(--text-white);
+    text-decoration: none;
+}
+
+.footer-links a.active {
+    color: var(--text-white);
+}
+
+.footer-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 1px;
 }
 
 .footer-copy {
