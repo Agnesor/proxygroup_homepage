@@ -1189,15 +1189,6 @@ body:has(section#contact-section) .hero-desc {
 
 section.competency-card .container {
     padding: 0 40px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* Применяем ширину контента для всех контентных секций на главной странице и странице компетенций */
-body:has(section#when-contact.competency-card) section.competency-card .container,
-body:has(.competency-card) section.competency-card .container {
-    max-width: 900px;
-    margin: 0 auto;
 }
 
 /* Компактные стили для секции команды - 3 карточки в ряд */
