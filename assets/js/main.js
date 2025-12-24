@@ -711,6 +711,45 @@ function initHeroSlider() {
     const indicatorsContainer = heroSection.querySelector('.hero-slider-indicators');
     const indicators = [];
 
+    // Функция для предзагрузки изображения
+    function preloadImage(slide, imageUrl) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+                slide.style.backgroundImage = `url('${imageUrl}')`;
+                slide.classList.add('loaded');
+                resolve();
+            };
+            img.onerror = () => {
+                // Если изображение не загрузилось, все равно показываем его
+                slide.style.backgroundImage = `url('${imageUrl}')`;
+                slide.classList.add('loaded');
+                resolve();
+            };
+            img.src = imageUrl;
+        });
+    }
+
+    // Загружаем изображения для всех слайдов
+    slides.forEach((slide, index) => {
+        const imageUrl = slide.getAttribute('data-bg-image');
+        if (imageUrl) {
+            // Сразу показываем размытое изображение
+            slide.style.backgroundImage = `url('${imageUrl}')`;
+            
+            // Предзагружаем полное изображение
+            if (index === 0) {
+                // Первое изображение загружаем сразу
+                preloadImage(slide, imageUrl);
+            } else {
+                // Остальные загружаем в фоне
+                setTimeout(() => {
+                    preloadImage(slide, imageUrl);
+                }, index * 500);
+            }
+        }
+    });
+
     // Создаем индикаторы
     slides.forEach((_, index) => {
         const indicator = document.createElement('button');
@@ -741,6 +780,12 @@ function initHeroSlider() {
         currentSlide = index;
         slides[currentSlide].classList.add('active');
         updateIndicators();
+        
+        // Убеждаемся, что изображение загружено для текущего слайда
+        const imageUrl = slides[currentSlide].getAttribute('data-bg-image');
+        if (imageUrl && !slides[currentSlide].classList.contains('loaded')) {
+            preloadImage(slides[currentSlide], imageUrl);
+        }
     }
 
     function nextSlide() {
@@ -755,6 +800,12 @@ function initHeroSlider() {
         
         // Update indicators
         updateIndicators();
+        
+        // Убеждаемся, что изображение загружено для текущего слайда
+        const imageUrl = slides[currentSlide].getAttribute('data-bg-image');
+        if (imageUrl && !slides[currentSlide].classList.contains('loaded')) {
+            preloadImage(slides[currentSlide], imageUrl);
+        }
     }
 
     // Start the slider - работает непрерывно, независимо от наведения мыши

@@ -844,13 +844,20 @@ p {
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity 1.5s ease-in-out;
+    transition: opacity 1.5s ease-in-out, filter 0.5s ease-in-out;
     z-index: 0;
+    filter: blur(20px);
+    transform: scale(1.1);
 }
 
 .hero-slider-slide.active {
     opacity: 1;
     z-index: 1;
+}
+
+.hero-slider-slide.loaded {
+    filter: blur(0);
+    transform: scale(1);
 }
 
 /* Равномерное затемнение для слайдов без градиента к низу */
@@ -1089,10 +1096,11 @@ section#approach .card.card-light p {
     color: var(--text-white) !important;
 }
 
-/* Белая заливка для тегов в секции approach */
+/* Белая обводка для тегов в секции approach без фона */
 section#approach .tag {
-    background: #FFFFFF !important;
-    color: var(--text-dark) !important;
+    background: transparent !important;
+    color: var(--text-white) !important;
+    border: 1px solid #FFFFFF !important;
 }
 
 /* Переопределение фона для секции команды на странице команды */
@@ -1625,8 +1633,7 @@ section#cases .cases-slider > *:hover {
 }
 
 .case-accent::after {
-    content: '›';
-    margin-left: 6px;
+    display: none;
 }
 
 /* Номера карточек */
@@ -1708,13 +1715,14 @@ section#cases .cases-slider > *:hover {
 }
 
 .checklist li::before {
-    content: "";
+    content: "›";
     position: absolute;
     left: 0;
-    top: 0.6em;
-    width: 10px;
-    height: 2px;
-    background: var(--accent);
+    top: 0.1em;
+    color: var(--accent);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
 }
 
 /* Light checklist inside light cards */
@@ -2194,6 +2202,12 @@ footer {
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+/* Увеличиваем ширину блока описания в hero-секции на странице команды */
+section.section-hero.parallax-hero .fade-in-up[style*="max-width: 900px"],
+body:has(section.section-hero.parallax-hero h1:contains("Команда")) .fade-in-up {
+    max-width: 900px !important;
+}
+
 .fade-in-up.visible {
     opacity: 1;
     transform: translateY(0);
@@ -2361,6 +2375,17 @@ footer {
 @media (max-width: 768px) {
     section {
         padding: 60px 0;
+    }
+    
+    /* Двухколоночный grid в секции #when-contact становится одноколоночным на мобильных */
+    section#when-contact .fade-in-up[style*="grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 24px;
+    }
+    
+    /* Убираем верхний отступ у proxy-structure на мобильных */
+    section#when-contact .proxy-structure {
+        padding-top: 0 !important;
     }
     
     /* На узких мобильных - сначала текст, потом картинка */
@@ -2719,9 +2744,39 @@ section#when-contact .proxy-structure {
     margin-left: auto !important;
     margin-right: auto !important;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     width: 100%;
     max-width: 100%;
+    gap: 12px;
+    padding: 0;
+    margin-top: 0;
+    align-self: start;
+    padding-top: 80px;
+}
+
+/* Вертикальные коннекторы для proxy-structure в секции #when-contact */
+section#when-contact .proxy-structure-connector {
+    transform: rotate(90deg);
+}
+
+/* Компактные размеры для элементов proxy-structure в секции #when-contact */
+section#when-contact .proxy-structure-item {
+    padding: 20px 16px;
+    max-width: 240px;
+    min-width: auto;
+    flex: none;
+}
+
+section#when-contact .proxy-structure-center {
+    padding: 12px 24px;
+    min-width: auto;
+}
+
+section#when-contact .proxy-structure-connector svg {
+    width: 24px;
+    height: 24px;
 }
 
 .proxy-structure-item {

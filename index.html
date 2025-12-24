@@ -62,9 +62,9 @@
     <section class="section-hero hero-slider">
         <div class="hero-slider-wrapper">
             <div class="hero-slider-slides">
-                <div class="hero-slider-slide" style="background-image: url('assets/images/hero-bg.jpg');"></div>
-                <div class="hero-slider-slide" style="background-image: url('assets/images/hero-bg2.jpg');"></div>
-                <div class="hero-slider-slide" style="background-image: url('assets/images/hero-bg3.jpg');"></div>
+                <div class="hero-slider-slide" data-bg-image="assets/images/hero-bg.jpg"></div>
+                <div class="hero-slider-slide" data-bg-image="assets/images/hero-bg2.jpg"></div>
+                <div class="hero-slider-slide" data-bg-image="assets/images/hero-bg3.jpg"></div>
             </div>
             <div class="hero-slider-indicators"></div>
         </div>
@@ -85,20 +85,23 @@
     <!-- Когда к нам обращаются -->
     <section id="when-contact" class="competency-card">
         <div class="container">
-            <div class="fade-in-up" style="max-width: 1000px;">
-                <h2 class="section-title fade-in-up" style="margin-bottom: 24px;">Кто мы</h2>
-                <p>
-                    PROXY — консалтинговая компания, работающая со сложными сделками, где стандартные решения не работают.
-                    Мы сопровождаем сделки с капиталоемкими активами, включая проблемные и стрессовые объекты,
-                    объединяя брокеридж, инвестиционную аналитику, юридическую и финансовую экспертизу в единую управляемую модель.
-                </p>
-                <p>
-                    Технологическая платформа PROXITY обеспечивает быстрый выход к верифицированным брокерам и инвесторам, для максимально быстрой, но таргетированной закрытой продажи.
-                </p>
-
-
+            <div class="fade-in-up" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+                <div>
+                    <h2 class="section-title fade-in-up" style="margin-bottom: 24px;">Кто мы</h2>
+                    <p>
+                        PROXY — консалтинговая компания, работающая со сложными сделками, где стандартные решения не работают.
+                        Мы сопровождаем сделки с капиталоемкими активами, включая проблемные и стрессовые объекты,
+                        объединяя брокеридж, инвестиционную аналитику, юридическую и финансовую экспертизу в единую управляемую модель.
+                    </p>
+                    <p>
+                        Технологическая платформа PROXITY обеспечивает быстрый выход к верифицированным брокерам и инвесторам, для максимально быстрой, но таргетированной закрытой продажи.
+                    </p>
+                    <p>
+                        В PROXY GROUP мы отвечаем не только за поиск контрагента и закрытие сделки, но и за контроль рисков и устойчивость результата для собственника или инвестора.
+                    </p>
+                </div>
                 <!-- Visual representation of PROXY GROUP structure -->
-                <div class="proxy-structure" style="margin-top: 48px;">
+                <div class="proxy-structure">
                     <a href="proxity.html" class="proxy-structure-item proxy-structure-proxity" style="text-decoration: none; display: block;">
                         <h3 class="proxy-structure-title">PROXITY</h3>
                         <p class="proxy-structure-desc">Платформа для поиска покупателей</p>
@@ -124,9 +127,6 @@
                         <h3 class="proxy-structure-title">PROXY</h3>
                         <p class="proxy-structure-desc">Консалтинговая компания для сопровождения сделок</p>
                     </div>
-                    <p>
-                        В PROXY GROUP мы отвечаем не только за поиск контрагента и закрытие сделки, но и за контроль рисков и устойчивость результата для собственника или инвестора.
-                    </p>
                 </div>
             </div>
         </div>
