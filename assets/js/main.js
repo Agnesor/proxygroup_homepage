@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroSlider();
     initModal();
     initCasesSlider();
+    initScrollToTop();
+    initCookieNotice();
 });
 
 /**
@@ -990,4 +992,86 @@ function initCasesSlider() {
     updateButtons();
     updateDots();
     startAutoScroll();
+}
+
+/**
+ * Initialize scroll to top button
+ * Shows button after scrolling 2 viewport heights down
+ */
+function initScrollToTop() {
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    if (!scrollToTopBtn) return;
+
+    // Threshold: 2 viewport heights
+    const threshold = window.innerHeight * 2;
+
+    function toggleButton() {
+        if (window.scrollY > threshold) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
+    }
+
+    // Check on scroll
+    window.addEventListener('scroll', toggleButton, { passive: true });
+
+    // Check on load
+    toggleButton();
+
+    // Scroll to top on click
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+/**
+ * Initialize cookie notice
+ * Shows notice on first visit and again after 5 days
+ */
+function initCookieNotice() {
+    const cookieNotice = document.getElementById('cookie-notice');
+    const acceptButton = document.getElementById('cookie-accept');
+    
+    if (!cookieNotice || !acceptButton) return;
+
+    const COOKIE_KEY = 'cookie_notice_closed';
+    const COOKIE_EXPIRY_DAYS = 5;
+
+    function shouldShowNotice() {
+        const closedDate = localStorage.getItem(COOKIE_KEY);
+        if (!closedDate) {
+            // First visit - show notice
+            return true;
+        }
+
+        // Check if 5 days have passed
+        const closedTimestamp = parseInt(closedDate, 10);
+        const now = Date.now();
+        const daysPassed = (now - closedTimestamp) / (1000 * 60 * 60 * 24);
+
+        return daysPassed >= COOKIE_EXPIRY_DAYS;
+    }
+
+    function showNotice() {
+        cookieNotice.classList.add('visible');
+    }
+
+    function hideNotice() {
+        cookieNotice.classList.remove('visible');
+        // Save current timestamp
+        localStorage.setItem(COOKIE_KEY, Date.now().toString());
+    }
+
+    // Show notice if needed
+    if (shouldShowNotice()) {
+        // Small delay for better UX
+        setTimeout(showNotice, 1000);
+    }
+
+    // Handle accept button click
+    acceptButton.addEventListener('click', hideNotice);
 }

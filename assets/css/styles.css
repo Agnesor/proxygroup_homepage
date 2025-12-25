@@ -2890,3 +2890,130 @@ section#when-contact .proxy-structure-connector svg {
         min-width: auto;
     }
 }
+
+/* Кнопка "Наверх" */
+.scroll-to-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 56px;
+    height: 56px;
+    background: var(--accent);
+    color: var(--text-white);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 4px 12px rgba(163, 22, 33, 0.3);
+}
+
+.scroll-to-top.visible {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background: var(--accent-light);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(163, 22, 33, 0.4);
+}
+
+.scroll-to-top:active {
+    transform: translateY(-2px);
+}
+
+.scroll-to-top svg {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+    }
+    
+    .scroll-to-top svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Cookie Notice */
+.cookie-notice {
+    position: fixed;
+    bottom: 32px;
+    left: 32px;
+    max-width: 360px;
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: none;
+}
+
+.cookie-notice.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cookie-notice-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cookie-notice-text {
+    color: var(--text-white);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.cookie-notice-button {
+    padding: 10px 20px;
+    background: var(--accent);
+    color: var(--text-white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    align-self: flex-start;
+}
+
+.cookie-notice-button:hover {
+    background: var(--accent-light);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .cookie-notice {
+        bottom: 24px;
+        left: 24px;
+        right: 24px;
+        max-width: none;
+        padding: 16px;
+    }
+    
+    .cookie-notice-button {
+        width: 100%;
+        align-self: stretch;
+    }
+}
