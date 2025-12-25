@@ -1194,6 +1194,18 @@ body:has(section#contact-section) .hero-desc {
     }
 }
 
+/* Ограничение ширины фона для секций competency-card на странице компетенций на больших экранах */
+/* Ограничение касается только фона, контент остается на всю ширину */
+@media (min-width: 1025px) {
+    body:has(.competency-card):not(:has(section.proxity-dark-section)) section.competency-card {
+        max-width: var(--container-max);
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
 
 section.competency-card .container {
     padding: 0 40px;
