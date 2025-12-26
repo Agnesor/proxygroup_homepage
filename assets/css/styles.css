@@ -1103,6 +1103,13 @@ section#approach .tag {
     border: 1px solid #FFFFFF !important;
 }
 
+/* Белая обводка и белый текст для тегов в секциях компетенций */
+body:has(.competency-card) .two-col .tags-list .tag {
+    background: transparent !important;
+    color: var(--text-white) !important;
+    border: 1px solid #FFFFFF !important;
+}
+
 /* Переопределение фона для секции команды на странице команды */
 section#team-grid {
     background: var(--bg-dark) !important;
@@ -1209,6 +1216,58 @@ body:has(section#contact-section) .hero-desc {
 
 section.competency-card .container {
     padding: 0 40px;
+}
+
+/* Стили для буллитов в секциях компетенций */
+.competency-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 120px;
+}
+
+/* Больший отступ для буллитов в секции "Инвестиционная аналитика и моделирование" */
+section.competency-card .competency-bullets {
+    padding-top: 180px;
+}
+
+/* Меньший отступ для буллитов в секции "Структурирование сделок" (без competency-card) */
+section:not(.competency-card) .competency-bullets {
+    padding-top: 60px;
+}
+
+.competency-bullets li {
+    position: relative;
+    padding-left: 32px;
+    color: var(--text-white);
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+.competency-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent);
+    transform: translateY(-50%);
+}
+
+/* Убираем верхний отступ у списка с буллитами на мобильных */
+@media (max-width: 768px) {
+    .competency-bullets {
+        padding-top: 0;
+    }
+    
+    /* Убираем верхний отступ у тегов в секциях компетенций на мобильных */
+    .two-col .tags-list[style*="padding-top: 120px"] {
+        padding-top: 0 !important;
+    }
 }
 
 /* Компактные стили для секции команды - 3 карточки в ряд */
@@ -1701,7 +1760,7 @@ section#cases .cases-slider > *:hover {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
-    align-items: stretch;
+    align-items: start;
 }
 
 .two-col .card {
@@ -2413,6 +2472,11 @@ body:has(section.section-hero.parallax-hero h1:contains("Команда")) .fade
     }
     
     .two-col > div:has(img) {
+        order: 2;
+    }
+    
+    /* Список с буллитами после текста на мобильных */
+    .two-col > div:has(.competency-bullets) {
         order: 2;
     }
     
