@@ -1261,7 +1261,15 @@ section:not(.competency-card) .competency-bullets {
 /* Убираем верхний отступ у списка с буллитами на мобильных */
 @media (max-width: 768px) {
     .competency-bullets {
-        padding-top: 0;
+        padding-top: 0 !important;
+    }
+    
+    section.competency-card .competency-bullets {
+        padding-top: 0 !important;
+    }
+    
+    section:not(.competency-card) .competency-bullets {
+        padding-top: 0 !important;
     }
     
     /* Убираем верхний отступ у тегов в секциях компетенций на мобильных */
@@ -2477,6 +2485,11 @@ body:has(section.section-hero.parallax-hero h1:contains("Команда")) .fade
     
     /* Список с буллитами после текста на мобильных */
     .two-col > div:has(.competency-bullets) {
+        order: 2;
+    }
+    
+    /* Теги после текста на мобильных */
+    .two-col > div:has(.tags-list) {
         order: 2;
     }
     
